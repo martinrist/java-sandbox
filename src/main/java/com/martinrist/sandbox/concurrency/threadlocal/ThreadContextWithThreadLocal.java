@@ -1,11 +1,6 @@
 package com.martinrist.sandbox.concurrency.threadlocal;
 
-
-public class ThreadContextWithThreadLocal {
-
-	private String userId;
-
-	private Long transactionId;
+public class ThreadContextWithThreadLocal extends ThreadContext {
 
 	private static ThreadLocal<ThreadContextWithThreadLocal> threadLocal = new ThreadLocal<ThreadContextWithThreadLocal>() {
 
@@ -15,28 +10,8 @@ public class ThreadContextWithThreadLocal {
 		}
 	};
 
-	public static ThreadContextWithThreadLocal get() {
+	public ThreadContext get() {
 		return threadLocal.get();
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public Long getTransactionId() {
-		return transactionId;
-	}
-
-	public void setTransactionId(Long transactionId) {
-		this.transactionId = transactionId;
-	}
-
-	@Override
-	public String toString() {
-		return "userId:" + userId + ",transactionId:" + transactionId;
-	}
 }
