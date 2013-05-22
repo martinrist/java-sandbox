@@ -1,6 +1,6 @@
 package com.martinrist.sandbox.concurrency.threadlocal;
 
-public class ThreadContextWithCustomThreadLocal {
+public class ThreadContext {
 
 	private String userId;
 
@@ -26,4 +26,5 @@ public class ThreadContextWithCustomThreadLocal {
 	public String toString() {
 		return "userId:" + userId + ",transactionId:" + transactionId;
 	}
+
 }
