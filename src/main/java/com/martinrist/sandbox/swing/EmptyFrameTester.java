@@ -21,4 +21,6 @@ public class EmptyFrameTester {
 
 class EmptyFrame extends DefaultFrame {
 
+	private static final long serialVersionUID = 1L;
+
 }

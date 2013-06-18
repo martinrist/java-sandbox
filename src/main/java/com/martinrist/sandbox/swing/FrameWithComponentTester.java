@@ -26,6 +26,8 @@ public class FrameWithComponentTester {
 
 class FrameWithComponent extends DefaultFrame {
 
+	private static final long serialVersionUID = 1L;
+
 	public FrameWithComponent() {
 		super("Frame with Component");
 		add(new TextComponent("This is some text"));
@@ -34,6 +36,7 @@ class FrameWithComponent extends DefaultFrame {
 
 class TextComponent extends JComponent {
 
+	private static final long serialVersionUID = 1L;
 	private final String content;
 
 	public TextComponent() {
