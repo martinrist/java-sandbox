@@ -9,20 +9,31 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import com.martinrist.sandbox.swing.DefaultFrame;
 
 public class ActionListenerExample {
 
+	private static final String MOTIF_LOOK_AND_FEEL = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+	private static final String METAL_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+	private static final String WINDOWS_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+
 	public static void main(String[] args) {
-		
+
+		try {
+			UIManager.setLookAndFeel(WINDOWS_LOOK_AND_FEEL);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		new ActionListenerExample().run();
-		
+
 	}
 
 	private void run() {
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				ActionListenerFrame frame = new ActionListenerFrame("Button Example");
@@ -33,20 +44,19 @@ public class ActionListenerExample {
 	}
 }
 
-
 class ActionListenerFrame extends DefaultFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	private JPanel buttonPanel = new JPanel();
-	
-	private JButton helloButton = new JButton("Say hello");
-	private JButton goodbyeButton = new JButton("Say goodbye");
-	private JLabel textLabel = new JLabel();
-	
+	private final JPanel buttonPanel = new JPanel();
+
+	private final JButton helloButton = new JButton("Say hello");
+	private final JButton goodbyeButton = new JButton("Say goodbye");
+	private final JLabel textLabel = new JLabel();
+
 	public ActionListenerFrame(String name) {
 		super(name);
-		
+
 		helloButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -66,12 +76,12 @@ class ActionListenerFrame extends DefaultFrame {
 				JOptionPane.showMessageDialog(ActionListenerFrame.this, "Goodbye!");
 			}
 		});
-		
+
 		add(buttonPanel);
 		buttonPanel.add(helloButton);
 		buttonPanel.add(goodbyeButton);
 		buttonPanel.add(textLabel);
-		
+
 	}
-	
+
 }
