@@ -9,23 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import com.martinrist.sandbox.swing.DefaultFrame;
 
 public class ActionListenerExample {
 
-	private static final String MOTIF_LOOK_AND_FEEL = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
-	private static final String METAL_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-	private static final String WINDOWS_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-
 	public static void main(String[] args) {
-
-		try {
-			UIManager.setLookAndFeel(WINDOWS_LOOK_AND_FEEL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		new ActionListenerExample().run();
 
