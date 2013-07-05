@@ -10,10 +10,14 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ActionMap;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import com.martinrist.sandbox.swing.DefaultFrame;
@@ -50,23 +54,30 @@ class ColourChangeActionFrame extends DefaultFrame {
 	public ColourChangeActionFrame(String title) {
 		super(title);
 
-		JButton redButton = new JButton(new ColourAction("Red", Color.RED));
-		JButton greenButton = new JButton(new ColourAction("Green", Color.GREEN));
-		JButton blueButton = new JButton(new ColourAction("Blue", Color.BLUE));
-
-		buttons.add(redButton);
-		buttons.add(greenButton);
-		buttons.add(blueButton);
+		addColour("Red", Color.RED, "ctrl R");
+		addColour("Green", Color.GREEN, "ctrl G");
+		addColour("Blue", Color.BLUE, "ctrl B");
+		addColour("Black", Color.BLACK, "ctrl K");
 
 		add(panel);
-		panel.add(redButton);
-		panel.add(greenButton);
-		panel.add(blueButton);
+
+	}
+
+	private void addColour(String colourName, Color colour, String acceleratorKey) {
+		ColourAction action = new ColourAction(colourName, colour);
+		JButton button = new JButton(action);
+		InputMap imap = panel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		String actionMapKey = "action." + colourName;
+		imap.put(KeyStroke.getKeyStroke(acceleratorKey), actionMapKey);
+		ActionMap amap = panel.getActionMap();
+		amap.put(actionMapKey, action);
+		panel.add(button);
 
 	}
 
 	class ColourAction extends AbstractAction {
 
+		private static final int ICON_SIZE = 15;
 		private static final long serialVersionUID = 1L;
 		private static final String COLOUR_KEY = "colour";
 
@@ -74,31 +85,27 @@ class ColourChangeActionFrame extends DefaultFrame {
 			putValue(COLOUR_KEY, col);
 			putValue(Action.NAME, name);
 			putValue(Action.SHORT_DESCRIPTION, "Set colour to " + name);
-			putValue(Action.SMALL_ICON, createButtonIcon(name));
+
+			Icon buttonIcon = createButtonIcon(name);
+			if (buttonIcon != null) {
+				putValue(Action.SMALL_ICON, buttonIcon);
+			}
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Color c = (Color) getValue(COLOUR_KEY);
 			panel.setBackground(c);
-
-			JButton source = (JButton) e.getSource();
-			source.setEnabled(false);
-			enableOtherButtons(source);
-		}
-
-		private void enableOtherButtons(JButton clickedButton) {
-			for (JButton button : buttons) {
-				if (!button.equals(clickedButton)) {
-					button.setEnabled(true);
-				}
-			}
 		}
 
 		private Icon createButtonIcon(String name) {
 			URL iconUrl = this.getClass().getResource("/com/martinrist/sandbox/swing/listeners/" + name + ".png");
+			if (iconUrl == null) {
+				return null;
+			}
+
 			Image unscaledImage = new ImageIcon(iconUrl).getImage();
-			Image scaledImage = unscaledImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+			Image scaledImage = unscaledImage.getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_DEFAULT);
 			Icon scaledIcon = new ImageIcon(scaledImage);
 			return scaledIcon;
 		}
