@@ -13,8 +13,8 @@ public class DefaultFrame extends JFrame {
 	}
 
 	public DefaultFrame(String title) {
+		super(title);
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle(title);
 	}
 }
