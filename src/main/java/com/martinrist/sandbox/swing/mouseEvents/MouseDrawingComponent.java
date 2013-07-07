@@ -1,7 +1,9 @@
 package com.martinrist.sandbox.swing.mouseEvents;
 
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,7 +24,9 @@ public class MouseDrawingComponent extends JComponent {
 
 	public MouseDrawingComponent(ShapeFactory shapeFactory) {
 		this.shapeFactory = shapeFactory;
-		this.addMouseListener(new MouseEventHandler());
+		MouseEventHandler handler = new MouseEventHandler();
+		this.addMouseListener(handler);
+		this.addMouseMotionListener(handler);
 	}
 
 	@Override
@@ -38,15 +42,48 @@ public class MouseDrawingComponent extends JComponent {
 
 	class MouseEventHandler extends MouseAdapter {
 
+		private final Cursor MOUSE_OVER_SHAPE_CURSOR = new Cursor(Cursor.CROSSHAIR_CURSOR);
+		private final Cursor DEFAULT_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
+
+		private final boolean afterFirstClick = false;
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 
-			Shape shape = shapeFactory.newShape(e.getX() - (SQUARE_SIZE / 2), e.getY() - (SQUARE_SIZE / 2),
-					SQUARE_SIZE, SQUARE_SIZE);
-			shapes.add(shape);
+			Shape shapeAtCursor = getShapeAtPoint(e.getPoint());
+
+			if (shapeAtCursor != null) {
+				if (e.getClickCount() == 2) {
+					shapes.remove(shapeAtCursor);
+				}
+			} else {
+				Shape shape = shapeFactory.newShape(e.getX() - (SQUARE_SIZE / 2), e.getY() - (SQUARE_SIZE / 2),
+						SQUARE_SIZE, SQUARE_SIZE);
+				shapes.add(shape);
+			}
 			repaint();
 		}
 
+		@Override
+		public void mouseMoved(MouseEvent e) {
+
+			Point cursorPosition = e.getPoint();
+
+			if (getShapeAtPoint(cursorPosition) != null) {
+				setCursor(MOUSE_OVER_SHAPE_CURSOR);
+			} else {
+				setCursor(DEFAULT_CURSOR);
+			}
+		}
+
+		private Shape getShapeAtPoint(Point point) {
+			for (Shape shape : shapes) {
+				if (shape.contains(point)) {
+					return shape;
+				}
+			}
+			return null;
+		}
 	}
 
 }
