@@ -45,8 +45,6 @@ public class MouseDrawingComponent extends JComponent {
 		private final Cursor MOUSE_OVER_SHAPE_CURSOR = new Cursor(Cursor.CROSSHAIR_CURSOR);
 		private final Cursor DEFAULT_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
 
-		private final boolean afterFirstClick = false;
-
 		@Override
 		public void mouseClicked(MouseEvent e) {
 
