@@ -36,21 +36,27 @@ public class ChoiceComponentsExample {
 @SuppressWarnings("serial")
 class ChoiceComponentsFrame extends DefaultFrame {
 
+	private static final int DEFAULT_FONT_SIZE = 12;
 	private static final String TEXT_CONTENT = "The quick brown fox jumps over the lazy dog";
 
-	private final JLabel textLabel = new JLabel(TEXT_CONTENT, SwingConstants.CENTER);
-	private final JCheckBox boldCheckBox = new JCheckBox(new BoldAction("Bold"));
-	private final JCheckBox italicCheckBox = new JCheckBox(new ItalicAction("Italic"));
+	private final JLabel textLabel;
+	private final JCheckBox boldCheckBox;
+	private final JCheckBox italicCheckBox;
 
 	public ChoiceComponentsFrame(final String title) {
 
 		super(title);
+
+		textLabel = new JLabel(TEXT_CONTENT, SwingConstants.CENTER);
+		textLabel.setFont(new Font("SansSerif", Font.PLAIN, DEFAULT_FONT_SIZE));
 		add(textLabel, BorderLayout.CENTER);
 
 		JPanel checkBoxPanel = new JPanel();
 		add(checkBoxPanel, BorderLayout.NORTH);
 
+		boldCheckBox = new JCheckBox(new BoldAction("Bold"));
 		checkBoxPanel.add(boldCheckBox);
+		italicCheckBox = new JCheckBox(new ItalicAction("Italic"));
 		checkBoxPanel.add(italicCheckBox);
 
 	}
