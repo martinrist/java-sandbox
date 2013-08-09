@@ -4,7 +4,7 @@ import java.awt.Font;
 
 public abstract class FontMutator {
 
-	private String name;
+	protected String name;
 	protected int style;
 	protected int size;
 

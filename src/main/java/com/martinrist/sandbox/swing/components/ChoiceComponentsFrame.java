@@ -3,6 +3,7 @@ package com.martinrist.sandbox.swing.components;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -41,7 +43,9 @@ class ChoiceComponentsFrame extends DefaultFrame {
 	private JCheckBox italicCheckBox;
 	private JPanel fontControlsPanel;
 	private JPanel fontSizePanel;
+	private JPanel fontSelectionPanel;
 	private ButtonGroup fontSizeButtonGroup;
+	private JComboBox<String> fontComboBox;
 
 	public ChoiceComponentsFrame(final String title) {
 		super(title);
@@ -61,11 +65,12 @@ class ChoiceComponentsFrame extends DefaultFrame {
 		createFontControlsPanel();
 		setUpTextStyleControls();
 		setUpFontSizeControls();
+		setUpFontSelectionControls();
 	}
 
 	private void createFontControlsPanel() {
 		fontControlsPanel = new JPanel();
-		fontControlsPanel.setLayout(new GridLayout(2, 1));
+		fontControlsPanel.setLayout(new GridLayout(3, 1));
 		add(fontControlsPanel, BorderLayout.NORTH);
 	}
 
@@ -116,6 +121,42 @@ class ChoiceComponentsFrame extends DefaultFrame {
 				});
 			}
 		});
+	}
+
+	private void setUpFontSelectionControls() {
+
+		fontSelectionPanel = new JPanel();
+		fontControlsPanel.add(fontSelectionPanel);
+		fontComboBox = new JComboBox<String>();
+		fontSelectionPanel.add(fontComboBox);
+
+		populateFontComboBox();
+
+		fontComboBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox<String> fontComboBox = (JComboBox<String>) e.getSource();
+				final String selectedFont = fontComboBox.getItemAt(fontComboBox.getSelectedIndex());
+
+				changeTextLabelFont(new FontMutator() {
+					@Override
+					public void changeFontAttributes() {
+						name = selectedFont;
+					}
+				});
+
+			}
+		});
+
+	}
+
+	private void populateFontComboBox() {
+		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		String[] availableFontNames = env.getAvailableFontFamilyNames();
+		for (String fontName : availableFontNames) {
+			fontComboBox.addItem(fontName);
+		}
 	}
 
 	private void changeTextLabelFont(FontMutator mutator) {
