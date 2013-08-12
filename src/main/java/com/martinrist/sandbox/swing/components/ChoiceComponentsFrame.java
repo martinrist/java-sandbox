@@ -136,6 +136,7 @@ class ChoiceComponentsFrame extends DefaultFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				@SuppressWarnings("unchecked")
 				JComboBox<String> fontComboBox = (JComboBox<String>) e.getSource();
 				final String selectedFont = fontComboBox.getItemAt(fontComboBox.getSelectedIndex());
 
