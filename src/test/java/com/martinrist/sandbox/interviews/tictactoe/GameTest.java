@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.martinrist.sandbox.interviews.tictactoe.exception.CounterAlreadyUsedException;
+import com.martinrist.sandbox.interviews.tictactoe.exception.NotYourTurnException;
 import com.martinrist.sandbox.interviews.tictactoe.exception.TooManyPlayersException;
 
 public class GameTest {
@@ -41,7 +42,7 @@ public class GameTest {
 
 	@Test
 	public void testAddTwoHumanPlayersWithDifferentCounters() {
-		setUpInitialGame();
+		setupInitialGame();
 
 		assertEquals(2, game.getNumberOfPlayers());
 		assertTrue(game.getPlayers().contains(player1X));
@@ -94,7 +95,7 @@ public class GameTest {
 
 	@Test
 	public void testAddThreePlayersThrowsException() {
-		setUpInitialGame();
+		setupInitialGame();
 
 		try {
 			game.addHumanPlayer("player3");
@@ -105,20 +106,20 @@ public class GameTest {
 
 	@Test
 	public void testPlayer1GoesFirst() {
-		setUpInitialGame();
+		setupInitialGame();
 		assertEquals(player1X, game.getNextPlayer());
 	}
 
 	@Test
 	public void testPlayer2FollowsPlayer1() {
-		setUpInitialGame();
+		setupInitialGame();
 		game.makeMove(player1X, 1, 1);
 		assertEquals(player2O, game.getNextPlayer());
 	}
 
 	@Test
 	public void testPlayer1FollowsPlayer2() {
-		setUpInitialGame();
+		setupInitialGame();
 		game.makeMove(player1X, 1, 1);
 		game.makeMove(player2O, 2, 2);
 		assertEquals(player1X, game.getNextPlayer());
@@ -126,17 +127,29 @@ public class GameTest {
 
 	@Test
 	public void testPlayer2CantGoOnPlayer1sTurn() {
-		setUpInitialGame();
+		setupInitialGame();
 		try {
 			game.makeMove(player2O, 1, 1);
-			fail("Should have thrown an exception by now!");
+			fail("Expected NotYourTurnException was not thrown");
 		} catch (NotYourTurnException nyte) {
+			// Expected result
 		}
 	}
 
-	// test player can't move if it's not their go
+	@Test
+	public void testPlayer1CantGoOnPlayer2sTurn() {
+		setupInitialGame();
+		game.makeMove(player1X, 1, 1);
+		game.makeMove(player2O, 2, 2);
+		try {
+			game.makeMove(player2O, 1, 2);
+			fail("Expected NotYourTurnException was not thrown");
+		} catch (NotYourTurnException nyte) {
+			// Expected result
+		}
+	}
 
-	private void setUpInitialGame() {
+	private void setupInitialGame() {
 		game.addPlayer(player1X);
 		game.addPlayer(player2O);
 	}

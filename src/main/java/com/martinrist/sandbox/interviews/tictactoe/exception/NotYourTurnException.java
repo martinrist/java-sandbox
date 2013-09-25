@@ -1,6 +1,5 @@
-package com.martinrist.sandbox.interviews.tictactoe;
+package com.martinrist.sandbox.interviews.tictactoe.exception;
 
-import com.martinrist.sandbox.interviews.tictactoe.exception.GameException;
 
 public class NotYourTurnException extends GameException {
 
