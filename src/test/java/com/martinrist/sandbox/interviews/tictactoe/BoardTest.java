@@ -1,12 +1,14 @@
 package com.martinrist.sandbox.interviews.tictactoe;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class BoardTest {
@@ -123,12 +125,73 @@ public class BoardTest {
 	}
 
 	@Test
-	public void testRetrieveAllSqauresMatchesBoardSize() throws Exception {
+	public void testRetrieveAllSquaresMatchesBoardSize() throws Exception {
 		List<Square> allSquares = board.getAllSquares();
 		assertEquals(DEFAULT_BOARD_SIZE * DEFAULT_BOARD_SIZE, allSquares.size());
 	}
 
-	// All squares
+	@Test
+	public void testRetrieveSquareWithValidReference() throws Exception {
+		Square square;
+		for (int row = 0; row < DEFAULT_BOARD_SIZE; row++) {
+			for (int col = 0; col < DEFAULT_BOARD_SIZE; col++) {
+				square = board.getSquare(row, col);
+				assertNotNull(square);
+				assertFalse(square.isFilled());
+			}
+		}
+	}
+
+	@Test
+	public void testRetrieveSquareWithNegativeRowReferenceThrowsIllegalArgumentException() throws Exception {
+		try {
+			@SuppressWarnings("unused")
+			Square square = board.getSquare(-1, 0);
+			fail("Expected IllegalArgumentException not thrown");
+		} catch (IllegalArgumentException iae) {
+			// Expected behaviour
+		}
+	}
+
+	@Test
+	public void testRetrieveSquareWithOutOfBoundsRowReferenceThrowsIllegalArgumentException() throws Exception {
+		try {
+			@SuppressWarnings("unused")
+			Square square = board.getSquare(DEFAULT_BOARD_SIZE, 0);
+			fail("Expected IllegalArgumentException not thrown");
+		} catch (IllegalArgumentException iae) {
+			// Expected behaviour
+		}
+	}
+
+	@Test
+	public void testRetrieveSquareWithNegativeColumnReferenceThrowsIllegalArgumentException() throws Exception {
+		try {
+			@SuppressWarnings("unused")
+			Square square = board.getSquare(0, -1);
+			fail("Expected IllegalArgumentException not thrown");
+		} catch (IllegalArgumentException iae) {
+			// Expected behaviour
+		}
+	}
+
+	@Test
+	public void testRetrieveSquareWithOutOfBoundsColumnReferenceThrowsIllegalArgumentException() throws Exception {
+		try {
+			@SuppressWarnings("unused")
+			Square square = board.getSquare(0, DEFAULT_BOARD_SIZE);
+			fail("Expected IllegalArgumentException not thrown");
+		} catch (IllegalArgumentException iae) {
+			// Expected behaviour
+		}
+	}
+
+	@Ignore
+	@Test
+	public void testAfterPlacingCounter_CanRetrieve() throws Exception {
+		board.placeCounter(Counter.X, 1, 1);
+		Square square = board.getSquare(1, 1);
+	}
 
 	// Counterpart of row / col tests for diagonals
 

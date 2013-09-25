@@ -54,4 +54,16 @@ public class Board {
 		return allSquares;
 	}
 
+	public void placeCounter(final Counter counter, final int row, final int col) {
+
+	}
+
+	public Square getSquare(final int row, final int col) {
+
+		if (row < 0 || row >= size || col < 0 || col >= size) {
+			throw new IllegalArgumentException(String.format("Invalid square reference (row=%d, col=%d)", row, col));
+		}
+
+		return new Square();
+	}
 }
