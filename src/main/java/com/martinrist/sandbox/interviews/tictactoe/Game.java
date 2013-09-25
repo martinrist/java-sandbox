@@ -57,7 +57,7 @@ public class Game {
 		for (Player player : players) {
 			result += "- " + player.toString() + "\n";
 		}
-		result += getBoard().toString();
+		result += board.toString();
 		return result;
 	}
 
@@ -78,17 +78,11 @@ public class Game {
 	}
 
 	public boolean isBoardFull() {
-		return getBoard().isFull();
+		return board.isFull();
 	}
 
 	public int getBoardSize() {
-		return getBoard().getSize();
-	}
-
-	// TODO: Not sure I'm happy about the game leaking its board out. We'll end
-	// up with LoD violations in the clients
-	public Board getBoard() {
-		return board;
+		return board.getSize();
 	}
 
 	public boolean isMoveValid(final int row, final int col) {

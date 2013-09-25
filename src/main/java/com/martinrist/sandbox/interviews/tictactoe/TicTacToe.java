@@ -35,6 +35,7 @@ public class TicTacToe {
 		output.println(player + "'s turn:");
 
 		boolean validMove = false;
+		// TODO: Can we remove these sentinel values?
 		int row = -1;
 		int col = -1;
 
@@ -44,8 +45,8 @@ public class TicTacToe {
 			output.print("Enter column: (0-" + (game.getBoardSize() - 1) + ")");
 			col = getValidatedRowOrColumn();
 
-			if (game.getBoard().isSquareFilled(row, col)) {
-				output.println("That square is already filled.  Please try another.");
+			if (!game.isMoveValid(row, col)) {
+				output.println("That move is not valid.  Please try another.");
 			} else {
 				validMove = true;
 			}
