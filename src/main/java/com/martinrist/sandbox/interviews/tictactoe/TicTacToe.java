@@ -13,18 +13,74 @@ public class TicTacToe {
 
 	private final Game game = new Game();
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new TicTacToe().play();
 	}
 
 	private void play() {
 		createPlayers();
+
+		while (!game.isBoardFull()) {
+			outputCurrentGameState();
+			playTurn();
+		}
+
+		output.println("Game is complete!");
 		outputCurrentGameState();
+	}
+
+	private void playTurn() {
+
+		Player player = game.getCurrentPlayer();
+		output.println(player + "'s turn:");
+
+		boolean validMove = false;
+		int row = -1;
+		int col = -1;
+
+		while (!validMove) {
+			output.print("Enter row: (0-" + (game.getBoardSize() - 1) + ")");
+			row = getValidatedRowOrColumn();
+			output.print("Enter column: (0-" + (game.getBoardSize() - 1) + ")");
+			col = getValidatedRowOrColumn();
+
+			if (game.getBoard().isSquareFilled(row, col)) {
+				output.println("That square is already filled.  Please try another.");
+			} else {
+				validMove = true;
+			}
+		}
+
+		game.makeMove(player, row, col);
+
+	}
+
+	private int getValidatedRowOrColumn() {
+		boolean valid = false;
+		int inputInteger = -1;
+
+		while (!valid) {
+			try {
+				inputInteger = Integer.parseInt(input.readLine());
+			} catch (IOException e) {
+				output.println("There was a problem reading the value.  Please try again");
+				continue;
+			} catch (NumberFormatException nfe) {
+				output.println("Please enter a valid number");
+				continue;
+			}
+			if (inputInteger < 0 || inputInteger >= game.getBoardSize()) {
+				output.println("Please enter a number between 0 and " + (game.getBoardSize() - 1));
+			} else {
+				valid = true;
+			}
+		}
+
+		return inputInteger;
 	}
 
 	private void outputCurrentGameState() {
 		output.println(game);
-
 	}
 
 	private void createPlayers() {
@@ -34,12 +90,9 @@ public class TicTacToe {
 		game.addHumanPlayer(player2Name);
 	}
 
-	private String getPlayerName(int playerNumber) {
-
+	private String getPlayerName(final int playerNumber) {
 		output.print("Enter name for player " + playerNumber + ":");
-
 		String name = null;
-
 		while (name == null || "".equals(name)) {
 			try {
 				name = input.readLine();
@@ -48,8 +101,6 @@ public class TicTacToe {
 				name = "Player" + playerNumber;
 			}
 		}
-
 		return name;
-
 	}
 }

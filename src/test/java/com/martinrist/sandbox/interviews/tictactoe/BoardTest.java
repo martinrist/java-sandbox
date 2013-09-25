@@ -297,6 +297,27 @@ public class BoardTest {
 		board.placeCounter(X, 2, 2);
 	}
 
+	@Test
+	public void testNewBoardIsNotFull() throws Exception {
+		assertFalse(board.isFull());
+	}
+
+	@Test
+	public void testPartiallyCompletedBoardIsNotFull() throws Exception {
+		constructSampleBoard();
+		assertFalse(board.isFull());
+	}
+
+	@Test
+	public void testBoardWithAllSquaresSetIsFull() throws Exception {
+		for (int row = 0; row < DEFAULT_BOARD_SIZE; row++) {
+			for (int col = 0; col < DEFAULT_BOARD_SIZE; col++) {
+				board.placeCounter(X, row, col);
+			}
+		}
+		assertTrue(board.isFull());
+	}
+
 	// Counterpart of row / col tests for diagonals
 
 	// Is a board full?

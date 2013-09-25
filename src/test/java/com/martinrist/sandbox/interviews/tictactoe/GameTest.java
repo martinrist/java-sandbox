@@ -9,10 +9,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.martinrist.sandbox.interviews.tictactoe.exception.CounterAlreadyUsedException;
 import com.martinrist.sandbox.interviews.tictactoe.exception.NotYourTurnException;
+import com.martinrist.sandbox.interviews.tictactoe.exception.SquareAlreadyFilledException;
 import com.martinrist.sandbox.interviews.tictactoe.exception.TooManyPlayersException;
 
 public class GameTest {
@@ -107,14 +109,14 @@ public class GameTest {
 	@Test
 	public void testPlayer1GoesFirst() {
 		setupInitialGame();
-		assertEquals(player1X, game.getNextPlayer());
+		assertEquals(player1X, game.getCurrentPlayer());
 	}
 
 	@Test
 	public void testPlayer2FollowsPlayer1() {
 		setupInitialGame();
 		game.makeMove(player1X, 1, 1);
-		assertEquals(player2O, game.getNextPlayer());
+		assertEquals(player2O, game.getCurrentPlayer());
 	}
 
 	@Test
@@ -122,7 +124,7 @@ public class GameTest {
 		setupInitialGame();
 		game.makeMove(player1X, 1, 1);
 		game.makeMove(player2O, 2, 2);
-		assertEquals(player1X, game.getNextPlayer());
+		assertEquals(player1X, game.getCurrentPlayer());
 	}
 
 	@Test
@@ -146,6 +148,19 @@ public class GameTest {
 			fail("Expected NotYourTurnException was not thrown");
 		} catch (NotYourTurnException nyte) {
 			// Expected result
+		}
+	}
+
+	@Ignore
+	@Test
+	public void testPlayer2CantOverwritePlayer1sMove() {
+		setupInitialGame();
+		game.makeMove(player1X, 1, 1);
+		try {
+			game.makeMove(player2O, 1, 1);
+			fail("Expected SquareAlreadyFilledException was not thrown");
+		} catch (SquareAlreadyFilledException safe) {
+			// Expected behaviour
 		}
 	}
 

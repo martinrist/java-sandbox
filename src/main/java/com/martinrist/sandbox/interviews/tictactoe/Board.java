@@ -100,4 +100,21 @@ public class Board {
 		Square square = squares[row][col];
 		return (square.isFilled() ? square.getCounter().toString() : " ");
 	}
+
+	public boolean isFull() {
+		for (int row = 0; row < getSize(); row++) {
+			for (int col = 0; col < getSize(); col++) {
+				if (!squares[row][col].isFilled()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean isSquareFilled(final int row, final int col) {
+		validatePositionArguments(row, col);
+
+		return squares[row][col].isFilled();
+	}
 }
