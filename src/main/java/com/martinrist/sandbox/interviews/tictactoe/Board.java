@@ -1,69 +1,69 @@
 package com.martinrist.sandbox.interviews.tictactoe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Board {
 
-	private final int size;
+	private final Square[][] squares;
 
 	public Board(final int size) {
 		if (size <= 0) {
 			throw new IllegalArgumentException("Cannot create board of size " + size);
 		}
-		this.size = size;
+
+		squares = new Square[size][size];
+
+		for (int row = 0; row < size; row++) {
+			for (int col = 0; col < size; col++) {
+				squares[row][col] = new Square();
+			}
+		}
 	}
 
 	public int getSize() {
-		return size;
+		return squares.length;
 	}
 
 	public List<Square> getRow(final int rowNum) {
-		if (rowNum >= size || rowNum < 0) {
+		int size = getSize();
+
+		if (rowNum >= getSize() || rowNum < 0) {
 			throw new IllegalArgumentException("Cannot access row " + rowNum + " on a board of size " + size);
 		}
 
-		List<Square> row = new ArrayList<>(size);
-		for (int i = 0; i < size; i++) {
-			row.add(new Square());
-		}
-
-		return row;
+		return Arrays.asList(squares[rowNum]);
 	}
 
 	public List<Square> getColumn(final int columnNum) {
+		int size = getSize();
 		if (columnNum >= size || columnNum < 0) {
 			throw new IllegalArgumentException("Cannot access column " + columnNum + " on a board of size " + size);
 		}
 
 		List<Square> column = new ArrayList<>(size);
-		for (int i = 0; i < size; i++) {
-			column.add(new Square());
+		for (int rowNum = 0; rowNum < size; rowNum++) {
+			column.add(squares[rowNum][columnNum]);
 		}
 
 		return column;
 	}
 
-	public List<Square> getAllSquares() {
-		List<Square> allSquares = new ArrayList<>(size * size);
-
-		for (int i = 0; i < size * size; i++) {
-			allSquares.add(new Square());
-		}
-
-		return allSquares;
-	}
-
 	public void placeCounter(final Counter counter, final int row, final int col) {
-
+		validatePositionArguments(row, col);
+		squares[row][col].setCounter(counter);
 	}
 
 	public Square getSquare(final int row, final int col) {
+		validatePositionArguments(row, col);
+		return squares[row][col];
+	}
 
+	private void validatePositionArguments(final int row, final int col) {
+		int size = getSize();
 		if (row < 0 || row >= size || col < 0 || col >= size) {
 			throw new IllegalArgumentException(String.format("Invalid square reference (row=%d, col=%d)", row, col));
 		}
-
-		return new Square();
 	}
 }
