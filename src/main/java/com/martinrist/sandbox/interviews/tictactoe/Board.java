@@ -55,6 +55,8 @@ public class Board {
 		squares[row][col].setCounter(counter);
 	}
 
+	// TODO: This isn't called anywhere except for tests. Does it need to be in
+	// the public interface?
 	public Square getSquare(final int row, final int col) {
 		validatePositionArguments(row, col);
 		return squares[row][col];

@@ -56,7 +56,10 @@ public class TicTacToe {
 	}
 
 	private int getValidatedRowOrColumn() {
+
 		boolean valid = false;
+
+		// TODO: See if it's possible to avoid the use of this sentinel value
 		int inputInteger = -1;
 
 		while (!valid) {
@@ -66,6 +69,8 @@ public class TicTacToe {
 				output.println("There was a problem reading the value.  Please try again");
 				continue;
 			} catch (NumberFormatException nfe) {
+				// TODO: This is using an exception to handle a typical input
+				// case - is there a better way?
 				output.println("Please enter a valid number");
 				continue;
 			}

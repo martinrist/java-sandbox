@@ -90,4 +90,10 @@ public class Game {
 	public Board getBoard() {
 		return board;
 	}
+
+	public boolean isMoveValid(final int row, final int col) {
+		// TODO: Should I be checking preconditions on row / col here?
+		return !board.isSquareFilled(row, col);
+	}
+
 }

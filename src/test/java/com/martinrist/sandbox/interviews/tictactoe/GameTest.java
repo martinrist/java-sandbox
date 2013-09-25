@@ -151,6 +151,18 @@ public class GameTest {
 		}
 	}
 
+	@Test
+	public void testIfSquareNotFilledMoveIsValid() throws Exception {
+		assertTrue(game.isMoveValid(1, 1));
+	}
+
+	@Test
+	public void testIfSquareFilledMoveIsNotValid() throws Exception {
+		setupInitialGame();
+		game.makeMove(player1X, 1, 1);
+		assertFalse(game.isMoveValid(1, 1));
+	}
+
 	@Ignore
 	@Test
 	public void testPlayer2CantOverwritePlayer1sMove() {
