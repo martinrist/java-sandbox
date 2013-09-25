@@ -9,9 +9,11 @@ import com.martinrist.sandbox.interviews.tictactoe.exception.TooManyPlayersExcep
 
 public class Game {
 
+	private static final int BOARD_SIZE = 3;
 	private static final int NUMBER_OF_PLAYERS = 2;
 	private final List<Player> players = new ArrayList<>();
 	private int currentPlayerIndex = 0;
+	private final Board board = new Board(BOARD_SIZE);
 
 	public void addHumanPlayer(final String name) {
 
@@ -59,6 +61,7 @@ public class Game {
 		for (Player player : players) {
 			result += "- " + player.toString() + "\n";
 		}
+		result += board.toString();
 		return result;
 	}
 

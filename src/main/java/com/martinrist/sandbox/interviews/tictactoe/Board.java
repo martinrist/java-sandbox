@@ -66,4 +66,38 @@ public class Board {
 			throw new IllegalArgumentException(String.format("Invalid square reference (row=%d, col=%d)", row, col));
 		}
 	}
+
+	@Override
+	public String toString() {
+
+		int size = getSize();
+		StringBuilder result = new StringBuilder();
+
+		for (int row = 0; row < size; row++) {
+
+			if (row != 0) {
+				for (int i = 0; i < 2 * size - 1; i++) {
+					result.append("-");
+				}
+				result.append("\n");
+			}
+
+			for (int col = 0; col < size; col++) {
+				if (col != 0) {
+					result.append('|');
+				}
+
+				result.append(getSymbolAt(row, col));
+			}
+
+			result.append("\n");
+		}
+
+		return result.toString();
+	}
+
+	private String getSymbolAt(final int row, final int col) {
+		Square square = squares[row][col];
+		return (square.isFilled() ? square.getCounter().toString() : " ");
+	}
 }
