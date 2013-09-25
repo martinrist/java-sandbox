@@ -23,20 +23,20 @@ public class SquareTest {
 
 	@Test
 	public void testPlacingCounterMakesASquareFilled() {
-		square.placeCounter(Counter.X);
+		square.setCounter(Counter.X);
 		assertTrue(square.isFilled());
 	}
 
 	@Test
 	public void testCanRetrievePreviouslyPlacedCounter() {
-		square.placeCounter(Counter.X);
+		square.setCounter(Counter.X);
 		assertEquals(Counter.X, square.getCounter());
 	}
 
 	@Test
 	public void testCanPlaceNewCounterOverExisting() {
-		square.placeCounter(Counter.X);
-		square.placeCounter(Counter.O);
+		square.setCounter(Counter.X);
+		square.setCounter(Counter.O);
 		assertEquals(Counter.O, square.getCounter());
 	}
 

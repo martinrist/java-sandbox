@@ -9,7 +9,7 @@ public class Square {
 		return filled;
 	}
 
-	public void placeCounter(final Counter counter) {
+	public void setCounter(final Counter counter) {
 		filled = true;
 		this.counter = counter;
 	}
