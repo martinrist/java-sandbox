@@ -1,7 +1,9 @@
 package com.martinrist.sandbox.lang.generics;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,4 +126,65 @@ public class PairTest {
 
 		Collections.addAll(pairs, pair1, pair2);
 	}
+
+	@Test
+	@SuppressWarnings("unused")
+	public void testDerivedPairNotAssignableToBasePair() {
+		Base b = new Derived(1); // I can do this - Derived extends Base
+		Base[] bArr = new Derived[10]; // I can also do this - Derived[] extends Base[]
+
+		// But this doesn't work - can't assign Pair<Derived> to Pair<Base>
+		//Pair<Base> basePair = new Pair<Derived>(new Derived(1), new Derived(2));
+
+	}
+
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	@Test
+	public void testReferencingUsingRawTypesDefeatsTypeSafety() {
+		Pair rawPair = new Pair<Base>(new Base(1), new Base(2));
+		rawPair.setSecond("foo"); // Defeats type safety
+
+		assertEquals(Base.class, rawPair.getFirst().getClass());
+		assertEquals(String.class, rawPair.getSecond().getClass());
+
+		try {
+			@SuppressWarnings("unused")
+			Base second = (Base) rawPair.getSecond();
+			fail("This should have thrown a ClassCastException");
+		} catch (ClassCastException cce) {
+			// This behaviour is expected
+		}
+
+	}
+
+	@Test
+	public void testReferenceUsingUpperBoundedWildcard() {
+
+		Pair<? extends Base> pairExtendingBase = new Pair<Derived>(new Derived(1), new Derived(2));
+
+		// Can get as upper bound (Base)
+		Base first = pairExtendingBase.getFirst();
+		assertEquals(1, first.getValue());
+
+		// Can only set as null
+		//pairExtendingBase.setFirst(new Derived(3));   // Compile error if uncommented
+		pairExtendingBase.setFirst(null);
+		assertNull(pairExtendingBase.getFirst());
+
+	}
+
+	@Test
+	public void testReferenceUsingLowerBoundedWildcard() {
+
+		List<? super Derived> listSuperDerived = new ArrayList<Base>();
+
+		// Can set
+		listSuperDerived.add(new Derived(1));
+
+		// Can only get as Object
+		@SuppressWarnings("unused")
+		Object first = listSuperDerived.get(0);
+
+	}
+
 }

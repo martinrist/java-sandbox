@@ -1,9 +1,9 @@
 package com.martinrist.sandbox.lang.generics;
 
-public class Pair<T extends Comparable<T>> {
+public class Pair<T extends Comparable<? super T>> {
 
-	private final T first;
-	private final T second;
+	private T first;
+	private T second;
 
 	public Pair(T first, T second) {
 		super();
@@ -22,8 +22,16 @@ public class Pair<T extends Comparable<T>> {
 		return first;
 	}
 
+	public void setFirst(T first) {
+		this.first = first;
+	}
+
 	public T getSecond() {
 		return second;
+	}
+
+	public void setSecond(T second) {
+		this.second = second;
 	}
 
 	/**
