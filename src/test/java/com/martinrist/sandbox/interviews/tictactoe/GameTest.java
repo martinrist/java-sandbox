@@ -163,19 +163,6 @@ public class GameTest {
 		assertFalse(game.isMoveValid(1, 1));
 	}
 
-	@Ignore
-	@Test
-	public void testPlayer2CantOverwritePlayer1sMove() {
-		setupInitialGame();
-		game.makeMove(player1X, 1, 1);
-		try {
-			game.makeMove(player2O, 1, 1);
-			fail("Expected SquareAlreadyFilledException was not thrown");
-		} catch (SquareAlreadyFilledException safe) {
-			// Expected behaviour
-		}
-	}
-
 	private void setupInitialGame() {
 		game.addPlayer(player1X);
 		game.addPlayer(player2O);
