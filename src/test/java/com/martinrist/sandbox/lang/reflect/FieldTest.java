@@ -93,10 +93,4 @@ public class FieldTest {
 		assertThat(obj.getName(), equalTo("Nicola"));
 	}
 
-	@Test(expected = SecurityException.class)
-	public void testUsingSetAccessibleWithRejectingSecurityManager() throws Exception {
-		System.setSecurityManager(new SecurityManager());
-		Field privateField = ClassWithPrivateField.class.getDeclaredField("name");
-		privateField.setAccessible(true);
-	}
 }

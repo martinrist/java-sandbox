@@ -1,11 +1,11 @@
 package com.martinrist.sandbox.util;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.Test;
 
 import java.util.Scanner;
 
-import org.junit.After;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class ScannerTest {
 
@@ -39,15 +39,6 @@ public class ScannerTest {
 		assertEquals("the", scanner.next());
 		assertEquals("lazy", scanner.next());
 		assertEquals("dog", scanner.next());
-	}
-	
-	@Test
-	public void testStringTraversalFromFileContent() {
-		scanner = new Scanner(getClass().getClassLoader().getResourceAsStream("com/martinrist/sandbox/util/ScannerTestInput.txt"));
-		verifyCorrectTokensReturned();
-		verifyCorrectTokensReturned();
-		verifyCorrectTokensReturned();
-		verifyCorrectTokensReturned();
 	}
 	
 }
