@@ -80,4 +80,18 @@ public class ArrayTest {
         assertEquals("Original intArray is unchanged in length", 5, intArray.length);
         assertTrue("Original intArray contains element '1'", Arrays.asList(stringArray1).contains("a"));
     }
+
+    @Test
+    public void testArraysAsList_ChangingViewChangesUnderlyingArray() {
+        List<String> stringList = Arrays.asList(stringArray1);
+        stringList.set(0, "z");
+        assertEquals("z", stringArray1[0]);
+    }
+
+    @Test
+    public void testArraysAsList_ChangingUnderlyingArrayChangesView() {
+        List<String> stringList = Arrays.asList(stringArray1);
+        stringArray1[0] = "z";
+        assertEquals("z", stringList.get(0));
+    }
 }
