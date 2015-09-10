@@ -46,4 +46,19 @@ public class Tank {
         }
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+
+        if (!isEmpty()) {
+            System.err.println("Attempt to destroy a Tank that isn't empty");
+
+            // This isn't actually going to work.  Exceptions thrown, but not
+            // caught by the finalizer are just ignored.
+            throw new IllegalStateException("Attempt to destroy a Tank that isn't empty");
+        } else {
+            System.out.println("Empty Tank destroyed correctly");
+        }
+
+    }
 }
