@@ -8,6 +8,7 @@ public class Gerbil extends Rodent {
 
     public Gerbil(String name) {
         super(name);
+        System.out.println("Initialising Gerbil(" + name + ")");
     }
 
     @Override

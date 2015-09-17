@@ -3,8 +3,11 @@ package com.martinrist.thinkingInJava.polymorphism;
 public abstract class Rodent {
 
     private String name;
+    private Member rodentMember1 = new Member("Rodent Member 1");
+    private Member rodentMember2 = new Member("Rodent Member 2");
 
     public Rodent(String name) {
+        System.out.println("Initialising Rodent(" + name + ")");
         this.name = name;
     }
 

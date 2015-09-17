@@ -8,6 +8,7 @@ public class Hamster extends Rodent {
 
     public Hamster(String name) {
         super(name);
+        System.out.println("Initialising Gerbil(" + name + ")");
     }
 
     @Override
