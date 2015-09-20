@@ -1,6 +1,6 @@
 package com.martinrist.thinkingInJava.interfaces;
 
-public abstract class AbstractInstrument implements Instrument {
+public abstract class AbstractInstrument implements Instrument, Playable {
 
     @Override
     public void play(Note n) {

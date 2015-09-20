@@ -4,12 +4,12 @@ public class Music {
 
     // Doesn’t care about type, so new types
     // added to the system still work right:
-    static void tune(Instrument i) {
+    static void tune(Playable i) {
         i.play(Note.MIDDLE_C);
     }
 
-    static void tuneAll(Instrument[] e) {
-        for (Instrument i : e) {
+    static void tuneAll(Playable[] e) {
+        for (Playable i : e) {
             tune(i);
         }
     }
@@ -17,7 +17,7 @@ public class Music {
     public static void main(String[] args) {
 
         // Upcasting during addition to the array:
-        Instrument[] orchestra = {new Wind(), new Percussion(), new Stringed(),
+        Playable[] orchestra = {new Wind(), new Percussion(), new Stringed(),
             new Brass(), new Woodwind()};
         tuneAll(orchestra);
     }

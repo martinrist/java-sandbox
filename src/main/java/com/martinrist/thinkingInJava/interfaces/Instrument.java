@@ -7,8 +7,6 @@ interface Instrument {
 
     // Cannot have method definitions:
 
-    void play(Note n); // Automatically public
-
     void adjust();
 
 }
