@@ -1,9 +1,9 @@
 package com.martinrist.thinkingInJava.interfaces.processors;
 
-public class Upcase extends Processor {
+public class Upcase extends StringProcessor {
 
     @Override
-    String process(Object input) {
+    public String process(Object input) {
         return ((String)input).toUpperCase();
     }
 }

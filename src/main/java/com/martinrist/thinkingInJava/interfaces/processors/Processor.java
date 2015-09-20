@@ -1,12 +1,8 @@
 package com.martinrist.thinkingInJava.interfaces.processors;
 
-public class Processor {
+public interface Processor {
 
-    public String name() {
-        return getClass().getSimpleName();
-    }
+    public String name();
+    Object process(Object input);
 
-    Object process(Object input) {
-        return input;
-    }
 }
