@@ -11,10 +11,7 @@ public class BandPass extends Filter {
     }
 
     @Override
-    public Waveform process(Waveform input) {
-
-        // Don't do anything for now
-        return input;
-
+    public String name() {
+        return super.name() + "[" + lowCutoff + "-" + highCutoff + "]";
     }
 }

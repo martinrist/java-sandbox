@@ -7,6 +7,13 @@ public class Filter {
     }
 
     public Waveform process(Waveform input) {
+
+        input.appendFilter(this);
         return input;
+    }
+
+    @Override
+    public String toString() {
+        return name();
     }
 }
