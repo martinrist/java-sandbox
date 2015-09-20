@@ -1,4 +1,4 @@
-package com.martinrist.thinkingInJava.interfaces;
+package com.martinrist.thinkingInJava.interfaces.music;
 
 public class Woodwind extends Wind {
 
