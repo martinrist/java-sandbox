@@ -32,14 +32,5 @@ public class Exercise4 {
         System.out.println("TreeSet       : " + fill(new TreeSet<>()));
         System.out.println("LinkedHashSet : " + fill(new LinkedHashSet<>()));
 
-
-
-
-
-
-
-
-
-
     }
 }
