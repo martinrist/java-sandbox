@@ -1,6 +1,9 @@
 package com.martinrist.thinkingInJava.containers;
 
-public class Sequence {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class Sequence implements Iterable<Object> {
 
     private Object[] items;
     private int next = 0;
@@ -14,24 +17,28 @@ public class Sequence {
             items[next++] = x;
     }
 
-    private class SequenceSelector implements Selector {
-        private int i = 0;
-
-        public boolean end() {
-            return i == items.length;
-        }
-
-        public Object current() {
-            return items[i];
-        }
-
-        public void next() {
-            if (i < items.length) i++;
-        }
+    @Override
+    public Iterator<Object> iterator() {
+        return new SequenceIterator();
     }
 
-    public Selector selector() {
-        return new SequenceSelector();
+    private class SequenceIterator implements Iterator<Object> {
+        private int i = 0;
+
+        @Override
+        public boolean hasNext() {
+            return (i < items.length);
+        }
+
+        @Override
+        public Object next() {
+            if (i < items.length) {
+                return items[i++];
+            } else {
+                throw new NoSuchElementException();
+            }
+        }
+
     }
 
 }
