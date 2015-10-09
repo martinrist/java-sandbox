@@ -5,9 +5,12 @@ package com.martinrist.thinkingInJava.strings;
 // {Args: JGrep.java "\\b[Ssct]\\w+"}
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,7 +22,7 @@ public class JGrep {
     public static void main(String[] args) throws Exception {
 
         if (args.length < 2) {
-            System.out.println("Usage: java JGrep file regex [flags]");
+            System.out.println("Usage: java JGrep path regex [flags]");
             System.exit(0);
         }
 
@@ -30,22 +33,43 @@ public class JGrep {
 
         Pattern p = Pattern.compile(args[1], flags);
 
-        // Iterate through the lines of the input file:
+        String path = args[0];
+
+        if (Files.isDirectory(Paths.get(path))) {
+            searchDirectory(p, path);
+        } else {
+            System.out.println("Searching file " + path);
+            searchFile(p, new File(path));
+        }
+
+    }
+
+    private static void searchDirectory(Pattern p, String path) throws FileNotFoundException {
+
+        File[] files = new File(path).listFiles();
+
+        for (File file : files) {
+            if (Files.isDirectory(file.toPath())) {
+                searchDirectory(p, file.getPath());
+            } else {
+                System.out.println("Searching file " + file.getPath());
+                searchFile(p, file);
+                System.out.println();
+            }
+        }
+
+    }
+
+    private static void searchFile(Pattern p, File file) throws FileNotFoundException {
+
         int index = 0;
         Matcher m = p.matcher("");
-        for (String line : getFileContents(args[0])) {
+        for (String line : getFileContents(file)) {
             m.reset(line);
             while (m.find())
                 System.out.println(index++ + ": " +
                         m.group() + ": " + m.start());
         }
-    }
-
-    public static List<String> getFileContents(String filename) throws FileNotFoundException {
-
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
-        return reader.lines().collect(Collectors.toList());
-
     }
 
     private static int parseFlags(String... flags) {
@@ -66,6 +90,13 @@ public class JGrep {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             return 0;
         }
+
+    }
+
+    public static List<String> getFileContents(File file) throws FileNotFoundException {
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        return reader.lines().collect(Collectors.toList());
 
     }
 
