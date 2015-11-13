@@ -6,11 +6,13 @@ public class EnumClass {
 
         for (Shrubbery s : Shrubbery.values()) {
             System.out.println(s + " ordinal: " + s.ordinal());
-            System.out.println(s.compareTo(Shrubbery.CRAWLING));
-            System.out.println(s.equals(Shrubbery.CRAWLING));
-            System.out.println(s == Shrubbery.CRAWLING);
-            System.out.println(s.getDeclaringClass());
-            System.out.println(s.name());
+            System.out.println("compareTo(CRAWLING): " + s.compareTo(Shrubbery.CRAWLING));
+            System.out.println("equals(CRAWLING): " + s.equals(Shrubbery.CRAWLING));
+            System.out.println("== CRAWLING: " + (s == Shrubbery.CRAWLING));
+            System.out.println("getDeclaringClass(): " + s.getDeclaringClass());
+            System.out.println("getClass().getSimpleName(): " + s.getClass().getSimpleName());
+            System.out.println("getClass.getSuperclass().getSimpleName(): " + s.getClass().getSuperclass().getSimpleName());
+            System.out.println("name(): " + s.name());
             System.out.println("--------------");
         }
     }
