@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="561.0" y="79.0">java.io.PrintWriter</node>
+    <node x="297.0" y="79.0">java.io.BufferedWriter</node>
+    <node x="176.0" y="79.0">java.io.FilterWriter</node>
+    <node x="32.5" y="158.0">java.io.FileWriter</node>
+    <node x="438.0" y="79.0">java.io.PipedWriter</node>
+    <node x="323.0" y="0.0">java.io.Writer</node>
+    <node x="0.0" y="79.0">java.io.OutputStreamWriter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="java.io.FileWriter" target="java.io.OutputStreamWriter">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.BufferedWriter" target="java.io.Writer">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.PrintWriter" target="java.io.Writer">
+      <point x="0.0" y="-14.5" />
+      <point x="610.0" y="49.0" />
+      <point x="385.1" y="49.0" />
+      <point x="27.600000000000023" y="14.5" />
+    </edge>
+    <edge source="java.io.PipedWriter" target="java.io.Writer">
+      <point x="0.0" y="-14.5" />
+      <point x="489.5" y="59.0" />
+      <point x="371.3" y="59.0" />
+      <point x="13.800000000000011" y="14.5" />
+    </edge>
+    <edge source="java.io.FilterWriter" target="java.io.Writer">
+      <point x="0.0" y="-14.5" />
+      <point x="226.5" y="59.0" />
+      <point x="343.7" y="59.0" />
+      <point x="-13.800000000000011" y="14.5" />
+    </edge>
+    <edge source="java.io.OutputStreamWriter" target="java.io.Writer">
+      <point x="0.0" y="-14.5" />
+      <point x="78.0" y="49.0" />
+      <point x="329.9" y="49.0" />
+      <point x="-27.599999999999994" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="329.5" y="93.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+

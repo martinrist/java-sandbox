@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="180.0" y="168.0">java.io.DataInputStream</node>
+    <node x="0.0" y="168.0">java.io.BufferedInputStream</node>
+    <node x="428.75" y="89.0">java.io.SequenceInputStream</node>
+    <node x="541.0" y="168.0">java.io.PushbackInputStream</node>
+    <node x="777.75" y="89.0">java.io.FileInputStream</node>
+    <node x="927.75" y="89.0">java.io.StringBufferInputStream</node>
+    <node x="337.0" y="168.0">java.io.LineNumberInputStream</node>
+    <node x="268.75" y="89.0">java.io.FilterInputStream</node>
+    <node x="1129.75" y="89.0">java.io.ByteArrayInputStream</node>
+    <node x="615.75" y="89.0">java.io.PipedInputStream</node>
+    <node x="710.75" y="0.0">java.io.InputStream</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="java.io.ByteArrayInputStream" target="java.io.InputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="1213.25" y="49.0" />
+      <point x="809.75" y="49.0" />
+      <point x="45.0" y="14.5" />
+    </edge>
+    <edge source="java.io.SequenceInputStream" target="java.io.InputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="512.25" y="59.0" />
+      <point x="737.75" y="59.0" />
+      <point x="-27.0" y="14.5" />
+    </edge>
+    <edge source="java.io.LineNumberInputStream" target="java.io.FilterInputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="429.0" y="148.0" />
+      <point x="356.25" y="148.0" />
+      <point x="17.5" y="14.5" />
+    </edge>
+    <edge source="java.io.PipedInputStream" target="java.io.InputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="686.75" y="69.0" />
+      <point x="755.75" y="69.0" />
+      <point x="-9.0" y="14.5" />
+    </edge>
+    <edge source="java.io.PushbackInputStream" target="java.io.FilterInputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="625.0" y="138.0" />
+      <point x="391.25" y="138.0" />
+      <point x="52.5" y="14.5" />
+    </edge>
+    <edge source="java.io.FileInputStream" target="java.io.InputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="842.75" y="69.0" />
+      <point x="773.75" y="69.0" />
+      <point x="9.0" y="14.5" />
+    </edge>
+    <edge source="java.io.BufferedInputStream" target="java.io.FilterInputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="80.0" y="138.0" />
+      <point x="286.25" y="138.0" />
+      <point x="-52.5" y="14.5" />
+    </edge>
+    <edge source="java.io.FilterInputStream" target="java.io.InputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="338.75" y="49.0" />
+      <point x="719.75" y="49.0" />
+      <point x="-45.0" y="14.5" />
+    </edge>
+    <edge source="java.io.DataInputStream" target="java.io.FilterInputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="248.5" y="148.0" />
+      <point x="321.25" y="148.0" />
+      <point x="-17.5" y="14.5" />
+    </edge>
+    <edge source="java.io.StringBufferInputStream" target="java.io.InputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="1018.75" y="59.0" />
+      <point x="791.75" y="59.0" />
+      <point x="27.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="648.5" y="98.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+

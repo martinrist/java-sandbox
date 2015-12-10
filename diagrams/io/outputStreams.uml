@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="359.0" y="158.0">java.io.PrintStream</node>
+    <node x="468.25" y="0.0">java.io.OutputStream</node>
+    <node x="349.0" y="79.0">java.io.ByteArrayOutputStream</node>
+    <node x="547.0" y="79.0">java.io.FileOutputStream</node>
+    <node x="178.0" y="79.0">java.io.FilterOutputStream</node>
+    <node x="708.0" y="79.0">java.io.PipedOutputStream</node>
+    <node x="168.0" y="158.0">java.io.BufferedOutputStream</node>
+    <node x="0.0" y="158.0">java.io.DataOutputStream</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="java.io.FileOutputStream" target="java.io.OutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="617.5" y="59.0" />
+      <point x="542.625" y="59.0" />
+      <point x="14.875" y="14.5" />
+    </edge>
+    <edge source="java.io.BufferedOutputStream" target="java.io.FilterOutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="java.io.DataOutputStream" target="java.io.FilterOutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="74.0" y="133.0" />
+      <point x="203.16666666666666" y="133.0" />
+      <point x="-50.33333333333334" y="14.5" />
+    </edge>
+    <edge source="java.io.ByteArrayOutputStream" target="java.io.OutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="438.0" y="59.0" />
+      <point x="512.875" y="59.0" />
+      <point x="-14.875" y="14.5" />
+    </edge>
+    <edge source="java.io.FilterOutputStream" target="java.io.OutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="253.5" y="49.0" />
+      <point x="483.125" y="49.0" />
+      <point x="-44.625" y="14.5" />
+    </edge>
+    <edge source="java.io.PrintStream" target="java.io.FilterOutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="411.0" y="133.0" />
+      <point x="303.83333333333337" y="133.0" />
+      <point x="50.33333333333337" y="14.5" />
+    </edge>
+    <edge source="java.io.PipedOutputStream" target="java.io.OutputStream">
+      <point x="0.0" y="-14.5" />
+      <point x="784.5" y="49.0" />
+      <point x="572.375" y="49.0" />
+      <point x="44.625" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="430.5" y="114.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
