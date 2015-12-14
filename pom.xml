@@ -4,6 +4,11 @@
 	<groupId>com.martinrist</groupId>
 	<artifactId>java-sandbox</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+            <spring.version>4.2.3.RELEASE</spring.version>
+    </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -39,9 +44,15 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-            <version>4.2.3.RELEASE</version>
+            <version>${spring.version}</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+    </dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
