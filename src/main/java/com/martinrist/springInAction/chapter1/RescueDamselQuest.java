@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter1.knights;
+package com.martinrist.springInAction.chapter1;
 
 /**
  * Quest that represents rescuing a damsel.

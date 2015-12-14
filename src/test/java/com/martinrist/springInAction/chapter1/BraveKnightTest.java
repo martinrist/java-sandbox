@@ -1,5 +1,7 @@
-package com.martinrist.springInAction.chapter1.knights;
+package com.martinrist.springInAction.chapter1;
 
+import com.martinrist.springInAction.chapter1.BraveKnight;
+import com.martinrist.springInAction.chapter1.Quest;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;

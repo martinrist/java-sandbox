@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter1.knights;
+package com.martinrist.springInAction.chapter1;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

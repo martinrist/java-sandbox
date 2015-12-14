@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter1.knights;
+package com.martinrist.springInAction.chapter1;
 
 /**
  * A braver (and therefore more useful) Knight than @see DamselRescuingKnight.

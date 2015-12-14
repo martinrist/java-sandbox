@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter1.knights;
+package com.martinrist.springInAction.chapter1;
 
 /**
  * A very specific kind of Knight, who appears to be only capable of
