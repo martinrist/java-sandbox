@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Qualifier("cold")
-@Creamy
-public class IceCream implements Dessert {
+@Fruity
+public class Popsicle implements Dessert {
 
     @Override
     public void eat() {
-        System.out.println("Eating ice cream");
+        System.out.println("Eating popsicle");
     }
 }

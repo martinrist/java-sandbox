@@ -15,6 +15,7 @@ public class Meal {
 
     @Autowired
     @Qualifier("cold")
+    @Fruity
     public void setDessert(Dessert dessert) {
         this.dessert = dessert;
     }
