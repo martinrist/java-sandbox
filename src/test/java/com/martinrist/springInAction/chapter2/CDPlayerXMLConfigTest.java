@@ -28,7 +28,7 @@ public class CDPlayerXMLConfigTest {
     private CDPlayer anotherCdPlayer;
 
     @Autowired
-    private MediaPlayer aThirdCdPlayer;
+    private CDPlayer aThirdCdPlayer;
 
     @Test
     public void testCDShouldNotBeNull() {
@@ -48,10 +48,10 @@ public class CDPlayerXMLConfigTest {
     }
 
     @Test
-    public void testPlayCDPlayerWithAbbeyRoad() {
-        aThirdCdPlayer.play();
-        assertThat(systemOutRule.getLog(),
-                is("Playing Abbey Road by The Beatles\n"));
+    public void testAbbeyRoadIsCorrectlyInjected() {
+        CompactDisc abbeyRoad = aThirdCdPlayer.getCd();
+        assertThat(abbeyRoad.getArtist(), is("The Beatles"));
+        assertThat(abbeyRoad.getTitle(), is("Abbey Road"));
     }
 
 

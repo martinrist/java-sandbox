@@ -7,4 +7,7 @@ package com.martinrist.springInAction.chapter2;
 public interface CompactDisc {
 
     void play();
+    String getTitle();
+    String getArtist();
+
 }
