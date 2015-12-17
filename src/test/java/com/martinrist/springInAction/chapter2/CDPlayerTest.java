@@ -20,14 +20,14 @@ public class CDPlayerTest {
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Autowired
-    private CompactDisc cd;
+    private CompactDisc sgtPeppers;
 
     @Autowired
     private MediaPlayer cdPlayer;
 
     @Test
     public void testCDShouldNotBeNull() {
-        assertThat(cd, notNullValue());
+        assertThat(sgtPeppers, notNullValue());
     }
 
     @Test
