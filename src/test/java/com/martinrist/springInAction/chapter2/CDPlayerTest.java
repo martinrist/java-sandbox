@@ -23,7 +23,7 @@ public class CDPlayerTest {
     private CompactDisc cd;
 
     @Autowired
-    private MediaPlayer player;
+    private MediaPlayer cdPlayer;
 
     @Test
     public void testCDShouldNotBeNull() {
@@ -32,7 +32,7 @@ public class CDPlayerTest {
 
     @Test
     public void play() {
-        player.play();
+        cdPlayer.play();
         assertThat(systemOutRule.getLog(),
                 is("Playing Sgt. Pepper's Lonely Hearts Club Band by The Beatles\n"));
     }
