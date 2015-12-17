@@ -6,10 +6,21 @@
 
     <bean id="sgtPeppersLonelyHeartsClubBand" class="com.martinrist.springInAction.chapter2.SgtPeppers" />
 
+    <!-- An example of passing values into constructor arguments -->
+    <bean id="abbeyRoad" class="com.martinrist.springInAction.chapter2.BlankDisc">
+        <constructor-arg name="artist" value="The Beatles" />
+        <constructor-arg name="title" value="Abbey Road" />
+    </bean>
+
     <bean id="cdPlayer" class="com.martinrist.springInAction.chapter2.CDPlayer">
         <constructor-arg name="cd" ref="sgtPeppersLonelyHeartsClubBand"/>
     </bean>
 
+    <!-- Using the 'c' namespace to configure constructor arguments -->
     <bean id="anotherCdPlayer" class="com.martinrist.springInAction.chapter2.CDPlayer" c:cd-ref="sgtPeppersLonelyHeartsClubBand" />
+
+    <bean id="aThirdCdPlayer" class="com.martinrist.springInAction.chapter2.CDPlayer">
+        <constructor-arg ref="abbeyRoad"/>
+    </bean>
 
 </beans>

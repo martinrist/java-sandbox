@@ -19,7 +19,7 @@ public class CDPlayerXMLConfigTest {
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Autowired
-    private CompactDisc cd;
+    private CompactDisc sgtPeppersLonelyHeartsClubBand;
 
     @Autowired
     private CDPlayer cdPlayer;
@@ -27,13 +27,16 @@ public class CDPlayerXMLConfigTest {
     @Autowired
     private CDPlayer anotherCdPlayer;
 
+    @Autowired
+    private MediaPlayer aThirdCdPlayer;
+
     @Test
     public void testCDShouldNotBeNull() {
-        assertThat(cd, notNullValue());
+        assertThat(sgtPeppersLonelyHeartsClubBand, notNullValue());
     }
 
     @Test
-    public void play() {
+    public void testPlayCDPlayerWithSgtPepper() {
         cdPlayer.play();
         assertThat(systemOutRule.getLog(),
                 is("Playing Sgt. Pepper's Lonely Hearts Club Band by The Beatles\n"));
@@ -42,6 +45,13 @@ public class CDPlayerXMLConfigTest {
     @Test
     public void testBothMediaPlayersContainSameCDInstance() {
         assertThat(cdPlayer.getCd(), sameInstance(anotherCdPlayer.getCd()));
+    }
+
+    @Test
+    public void testPlayCDPlayerWithAbbeyRoad() {
+        aThirdCdPlayer.play();
+        assertThat(systemOutRule.getLog(),
+                is("Playing Abbey Road by The Beatles\n"));
     }
 
 
