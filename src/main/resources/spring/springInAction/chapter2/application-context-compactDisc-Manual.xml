@@ -32,4 +32,8 @@
         <constructor-arg ref="abbeyRoad"/>
     </bean>
 
+    <bean id="cdPlayerWithPropertyInjection" class="com.martinrist.springInAction.chapter2.CDPlayerWithPropertyInjection">
+        <property name="compactDisc" ref="abbeyRoad"/>
+    </bean>
+
 </beans>
