@@ -8,10 +8,4 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 @ComponentScan
 public class MealConfig {
-
-    @Bean
-    @Primary
-    public Dessert iceCream() {
-        return new IceCream();
-    }
 }
