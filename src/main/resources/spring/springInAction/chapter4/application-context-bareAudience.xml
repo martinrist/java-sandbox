@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <bean id="classicalConcert" class="com.martinrist.springInAction.chapter4.ClassicalConcert" />
+    <bean id="dreadfulConcert" class="com.martinrist.springInAction.chapter4.DreadfulConcert" />
+
+    <bean id="bareAudience" class="com.martinrist.springInAction.chapter4.BareAudience" />
+
+    <aop:config>
+        <aop:aspect ref="bareAudience">
+
+            <aop:pointcut id="perform"
+                          expression="execution(* com.martinrist.springInAction.chapter4.Performance.perform(..))"/>
+
+            <aop:before pointcut="execution(* com.martinrist.springInAction.chapter4.Performance.perform(..))"
+                        method="silenceCellPhones" />
+
+            <aop:before pointcut-ref="perform" method="takeSeats" />
+
+            <aop:after-returning pointcut-ref="perform" method="applaud" />
+
+            <aop:after-throwing pointcut-ref="perform" method="demandRefund" />
+
+        </aop:aspect>
+
+    </aop:config>
+
+
+</beans>
