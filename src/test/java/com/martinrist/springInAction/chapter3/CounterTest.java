@@ -7,7 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
 
@@ -27,9 +26,8 @@ public class CounterTest {
     }
 
     @Test
-    public void testCountersHaveCorrectIds() {
-        assertThat(counter1.getId(), is(1));
-        assertThat(counter2.getId(), is(2));
+    public void testCountersHaveDifferentIds() {
+        assertThat(counter1.getId(), not(counter2.getId()));
     }
 
 
