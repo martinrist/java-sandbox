@@ -1,6 +1,6 @@
-package com.martinrist.springInAction.chapter5.data;
+package com.martinrist.springInAction.spittr.data;
 
-import com.martinrist.springInAction.chapter5.domain.Spittle;
+import com.martinrist.springInAction.spittr.domain.Spittle;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

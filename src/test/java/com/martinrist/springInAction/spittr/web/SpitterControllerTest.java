@@ -1,7 +1,7 @@
-package com.martinrist.springInAction.chapter5.web;
+package com.martinrist.springInAction.spittr.web;
 
-import com.martinrist.springInAction.chapter5.data.SpitterRepository;
-import com.martinrist.springInAction.chapter5.domain.Spitter;
+import com.martinrist.springInAction.spittr.data.SpitterRepository;
+import com.martinrist.springInAction.spittr.domain.Spitter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;

@@ -1,6 +1,6 @@
-package com.martinrist.springInAction.chapter5.data;
+package com.martinrist.springInAction.spittr.data;
 
-import com.martinrist.springInAction.chapter5.domain.Spitter;
+import com.martinrist.springInAction.spittr.domain.Spitter;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -23,5 +23,5 @@ public class DummySpitterRepository implements SpitterRepository {
     public Spitter findByUserName(String username) {
         return new Spitter(null, "dummyFirstName", "dummyLastName", username, "dummyPassword");
     }
-    
+
 }

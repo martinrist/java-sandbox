@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter5.domain;
+package com.martinrist.springInAction.spittr.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

@@ -1,6 +1,5 @@
-package com.martinrist.springInAction.chapter5.web;
+package com.martinrist.springInAction.spittr.web;
 
-import com.martinrist.springInAction.chapter5.web.HomeController;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;

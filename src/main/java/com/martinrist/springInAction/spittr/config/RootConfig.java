@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter5.config;
+package com.martinrist.springInAction.spittr.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  * package, excluding those annotated with @EnableWebMvc.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.martinrist.springInAction.chapter5"},
+@ComponentScan(basePackages = {"com.martinrist.springInAction.spittr"},
                excludeFilters = {@ComponentScan.Filter(type= FilterType.ANNOTATION, value = EnableWebMvc.class)})
 public class RootConfig {
 }

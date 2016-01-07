@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter5.config;
+package com.martinrist.springInAction.spittr.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

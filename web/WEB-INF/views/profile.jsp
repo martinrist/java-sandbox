@@ -4,7 +4,7 @@
 <head>
     <title>Spittr</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />" >
-    <jsp:useBean id="spitter" scope="request" type="com.martinrist.springInAction.chapter5.domain.Spitter"/>
+    <jsp:useBean id="spitter" scope="request" type="com.martinrist.springInAction.spittr.domain.Spitter"/>
 </head>
 <body>
     <h1>Your Profile</h1>

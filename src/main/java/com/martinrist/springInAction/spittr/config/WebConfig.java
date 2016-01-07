@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter5.config;
+package com.martinrist.springInAction.spittr.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.martinrist.springInAction.chapter5.web")
+@ComponentScan("com.martinrist.springInAction.spittr.web")
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean
