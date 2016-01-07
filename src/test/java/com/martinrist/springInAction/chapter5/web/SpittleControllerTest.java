@@ -61,6 +61,20 @@ public class SpittleControllerTest {
 
     }
 
+    @Test
+    public void testShouldShowIndividualSpittle() throws Exception {
+
+        Spittle expectedSpittle = new Spittle("Hello", new Date());
+
+        when(mockRepository.findSpittle(12345)).thenReturn(expectedSpittle);
+
+        mockMvc.perform(get("/spittles/12345"))
+                .andExpect(view().name("spittle"))
+                .andExpect(model().attributeExists("spittle"))
+                .andExpect(model().attribute("spittle", expectedSpittle));
+
+    }
+
     private List<Spittle> createSpittleList(int count) {
         List<Spittle> spittles = new ArrayList<>();
         for (int i = 0; i < count; i++) {

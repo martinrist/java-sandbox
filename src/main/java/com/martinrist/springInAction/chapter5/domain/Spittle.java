@@ -2,6 +2,7 @@ package com.martinrist.springInAction.chapter5.domain;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.Date;
 
@@ -18,11 +19,15 @@ public class Spittle {
     private Double longitude;
 
     public Spittle(String message, Date time) {
-        this(message, time, 0.0,  0.0);
+        this(null, message, time);
     }
 
-    public Spittle(String message, Date time, Double latitude, Double longitude) {
-        this.id = null;
+    public Spittle(Long id, String message, Date time) {
+        this(id, message, time, 0.0, 0.0);
+    }
+
+    public Spittle(Long id, String message, Date time, Double latitude, Double longitude) {
+        this.id = id;
         this.message = message;
         this.time = time;
         this.latitude = latitude;
@@ -57,6 +62,11 @@ public class Spittle {
     @Override
     public int hashCode() {
         return HashCodeBuilder.reflectionHashCode(this, new String[] {"id", "time"});
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }
 
