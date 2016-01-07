@@ -1,8 +1,8 @@
-package com.martinrist.springInAction.chapter5;
+package com.martinrist.springInAction.chapter5.web;
 
 import com.martinrist.springInAction.chapter5.data.SpittleRepository;
 import com.martinrist.springInAction.chapter5.domain.Spittle;
-import com.martinrist.springInAction.chapter5.web.SpittleController;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
@@ -21,21 +21,40 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 public class SpittleControllerTest {
 
+    private SpittleRepository mockRepository;
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() {
+        mockRepository = mock(SpittleRepository.class);
+        SpittleController controller = new SpittleController(mockRepository);
+        mockMvc = standaloneSetup(controller)
+                .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
+                .build();
+    }
+
     @Test
     public void testShouldShowRecentSpittles() throws Exception {
 
         List<Spittle> expectedSpittles = createSpittleList(20);
 
-        SpittleRepository mockRepository = mock(SpittleRepository.class);
-        when(mockRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedSpittles);
-
-        SpittleController controller = new SpittleController(mockRepository);
-
-        MockMvc mockMvc = standaloneSetup(controller)
-                                .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
-                                .build();
+        when(mockRepository.findSpittles(Long.valueOf(SpittleController.MAX_ID), 20)).thenReturn(expectedSpittles);
 
         mockMvc.perform(get("/spittles"))
+                .andExpect(view().name("spittles"))
+                .andExpect(model().attributeExists("spittleList"))
+                .andExpect(model().attribute("spittleList", hasItems(expectedSpittles.toArray())));
+
+    }
+
+    @Test
+    public void testShouldShowPagedSpittles() throws Exception {
+
+        List<Spittle> expectedSpittles = createSpittleList(50);
+
+        when(mockRepository.findSpittles(238900, 50)).thenReturn(expectedSpittles);
+
+        mockMvc.perform(get("/spittles?max=238900&count=50"))
                 .andExpect(view().name("spittles"))
                 .andExpect(model().attributeExists("spittleList"))
                 .andExpect(model().attribute("spittleList", hasItems(expectedSpittles.toArray())));

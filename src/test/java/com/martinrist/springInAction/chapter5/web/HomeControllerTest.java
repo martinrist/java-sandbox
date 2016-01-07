@@ -1,4 +1,4 @@
-package com.martinrist.springInAction.chapter5;
+package com.martinrist.springInAction.chapter5.web;
 
 import com.martinrist.springInAction.chapter5.web.HomeController;
 import org.junit.Test;
