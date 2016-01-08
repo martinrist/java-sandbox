@@ -76,6 +76,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.2.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>3.0.5</version>
+        </dependency>
     </dependencies>
 
 	<build>
