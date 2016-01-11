@@ -45,7 +45,7 @@ public class SpitterController {
     }
 
     @RequestMapping(value="/register", method=POST)
-    public String processRegistration(@RequestPart MultipartFile profilePicture, @Valid Spitter spitter, Errors errors) {
+    public String processRegistration(@RequestPart MultipartFile profilePicture, @Valid Spitter spitter, Model model, Errors errors) {
 
         if (errors.hasErrors()) {
             return "registerForm";
@@ -53,14 +53,18 @@ public class SpitterController {
 
         spitterRepository.save(spitter);
 
-        try {
-            profilePicture.transferTo(new File(imageUploadDir + "/" + profilePicture.getOriginalFilename()));
-        } catch (IOException e) {
-            // For now, we'll just ignore the picture upload if there's a problem
-            e.printStackTrace();
+        if (!profilePicture.isEmpty()) {
+            try {
+                profilePicture.transferTo(new File(imageUploadDir + "/" + profilePicture.getOriginalFilename()));
+            } catch (IOException e) {
+                // For now, we'll just ignore the picture upload if there's a problem
+                e.printStackTrace();
+            }
         }
 
-        return "redirect:/spitter/" + spitter.getUsername();
+        model.addAttribute("username", spitter.getUsername());
+
+        return "redirect:/spitter/{username}";
     }
 
     @RequestMapping(value="/{username}", method=GET)
