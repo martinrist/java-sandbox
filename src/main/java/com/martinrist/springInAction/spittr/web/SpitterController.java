@@ -8,8 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -23,6 +27,8 @@ public class SpitterController {
 
     private SpitterRepository spitterRepository;
 
+    public static final String UPLOAD_DIR = "/tmp/spittr/profiles";
+
     @Autowired
     public SpitterController(SpitterRepository spitterRepository) {
         this.spitterRepository = spitterRepository;
@@ -35,13 +41,21 @@ public class SpitterController {
     }
 
     @RequestMapping(value="/register", method=POST)
-    public String processRegistration(@Valid Spitter spitter, Errors errors) {
+    public String processRegistration(@RequestPart MultipartFile profilePicture, @Valid Spitter spitter, Errors errors) {
 
         if (errors.hasErrors()) {
             return "registerForm";
         }
 
         spitterRepository.save(spitter);
+
+        try {
+            profilePicture.transferTo(new File(UPLOAD_DIR + "/" + profilePicture.getOriginalFilename()));
+        } catch (IOException e) {
+            // For now, we'll just ignore the picture upload if there's a problem
+            e.printStackTrace();
+        }
+
         return "redirect:/spitter/" + spitter.getUsername();
     }
 
