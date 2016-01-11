@@ -25,9 +25,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/spitter")
 public class SpitterController {
 
+    public static final String DEFAULT_UPLOAD_DIR = "/tmp/spittr/profiles";
+
     private SpitterRepository spitterRepository;
 
-    public static final String UPLOAD_DIR = "/tmp/spittr/profiles";
+    @Autowired(required = false)
+    private String imageUploadDir = DEFAULT_UPLOAD_DIR;
 
     @Autowired
     public SpitterController(SpitterRepository spitterRepository) {
@@ -50,7 +53,7 @@ public class SpitterController {
         spitterRepository.save(spitter);
 
         try {
-            profilePicture.transferTo(new File(UPLOAD_DIR + "/" + profilePicture.getOriginalFilename()));
+            profilePicture.transferTo(new File(imageUploadDir + "/" + profilePicture.getOriginalFilename()));
         } catch (IOException e) {
             // For now, we'll just ignore the picture upload if there's a problem
             e.printStackTrace();
