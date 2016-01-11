@@ -5,6 +5,7 @@ import com.martinrist.springInAction.spittr.domain.Spitter;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -51,6 +52,11 @@ public class SpitterControllerTest {
 
     }
 
+    @Test
+    public void testRetrieveNonExistentSpitterShouldReturn404() throws Exception {
 
+        mockMvc.perform(get("/spitter/thisisnottheuseryourelookingfor"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 
 }

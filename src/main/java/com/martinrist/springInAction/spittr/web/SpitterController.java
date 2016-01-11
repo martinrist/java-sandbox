@@ -2,6 +2,7 @@ package com.martinrist.springInAction.spittr.web;
 
 import com.martinrist.springInAction.spittr.data.SpitterRepository;
 import com.martinrist.springInAction.spittr.domain.Spitter;
+import com.martinrist.springInAction.spittr.exception.SpitterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,6 +66,9 @@ public class SpitterController {
     @RequestMapping(value="/{username}", method=GET)
     public String showSpitterProfile(@PathVariable String username, Model model) {
         Spitter spitter = spitterRepository.findByUserName(username);
+        if (spitter == null) {
+            throw new SpitterNotFoundException("Unable to locate Spitter with username " + username);
+        }
         model.addAttribute(spitter);
         return "profile";
     }
