@@ -4,12 +4,15 @@ import com.martinrist.springInAction.spittr.data.SpitterRepository;
 import com.martinrist.springInAction.spittr.domain.Spitter;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.io.ByteArrayInputStream;
+
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -41,16 +44,25 @@ public class SpitterControllerTest {
 
         when(mockRepository.save(unsaved)).thenReturn(saved);
 
-        mockMvc.perform(post("/spitter/register")
-                            .param("firstName", "Jack")
-                            .param("lastName", "Bauer")
-                            .param("username", "jbauer")
-                            .param("password", "24hours"))
-                .andExpect(redirectedUrl("/spitter/jbauer"));
+        // TODO: Replace this with a proper mock object that doesn't get written to the filesystem
+        MockMultipartFile profilePic = new MockMultipartFile("profilePicture",
+                                                             "foo.txt",
+                                                             "text/plain",
+                                                             new ByteArrayInputStream("foo".getBytes()));
+
+        mockMvc.perform(fileUpload("/spitter/register")
+                        .file(profilePic)
+                        .param("firstName", "Jack")
+                        .param("lastName", "Bauer")
+                        .param("username", "jbauer")
+                        .param("password", "24hours"))
+                .andExpect(redirectedUrl("/spittr/spitter/jbauer"));
 
         verify(mockRepository, atLeastOnce()).save(unsaved);
 
     }
+
+
 
     @Test
     public void testRetrieveNonExistentSpitterShouldReturn404() throws Exception {
