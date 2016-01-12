@@ -7,7 +7,7 @@ import javax.servlet.ServletRegistration;
 
 /**
  * Programmatic configuration class for the Spittr sample web app.
- * This configuration maps the Spring DispatcherServlet to all URLs.
+ * This configuration maps the Spring DispatcherServlet to all URLs under /spittr/.
  */
 public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
