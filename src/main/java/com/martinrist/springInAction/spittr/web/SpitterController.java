@@ -64,7 +64,7 @@ public class SpitterController {
 
         model.addAttribute("username", spitter.getUsername());
 
-        return "redirect:/spitter/{username}";
+        return "redirect:/spittr/spitter/{username}";
     }
 
     @RequestMapping(value="/{username}", method=GET)
