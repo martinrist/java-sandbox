@@ -8,11 +8,10 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.io.ByteArrayInputStream;
-
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -46,9 +45,9 @@ public class SpitterControllerTest {
 
         // TODO: Replace this with a proper mock object that doesn't get written to the filesystem
         MockMultipartFile profilePic = new MockMultipartFile("profilePicture",
-                                                             "foo.txt",
-                                                             "text/plain",
-                                                             new ByteArrayInputStream("foo".getBytes()));
+                "foo.txt",
+                "text/plain",
+                new byte[] {});
 
         mockMvc.perform(fileUpload("/spitter/register")
                         .file(profilePic)
@@ -60,6 +59,23 @@ public class SpitterControllerTest {
 
         verify(mockRepository, atLeastOnce()).save(unsaved);
 
+    }
+
+    @Test
+    public void testEmptyRegistrationFormShouldReturnOriginalPage() throws Exception {
+
+        // TODO: Replace this with a proper mock object that doesn't get written to the filesystem
+        MockMultipartFile profilePic = new MockMultipartFile("profilePicture",
+                "foo.txt",
+                "text/plain",
+                new byte[] {});
+
+        mockMvc.perform(fileUpload("/spitter/register")
+                        .file(profilePic))
+                .andExpect(view().name("registerForm"))
+                .andExpect(model().attributeHasFieldErrors("spitter", "firstName", "lastName", "username", "password"));
+
+        verifyZeroInteractions(mockRepository);
     }
 
 

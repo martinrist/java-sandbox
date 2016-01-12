@@ -45,7 +45,7 @@ public class SpitterController {
     }
 
     @RequestMapping(value="/register", method=POST)
-    public String processRegistration(@RequestPart MultipartFile profilePicture, @Valid Spitter spitter, Model model, Errors errors) {
+    public String processRegistration(@RequestPart MultipartFile profilePicture, @Valid Spitter spitter, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return "registerForm";
