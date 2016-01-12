@@ -11,9 +11,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.fileUpload;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 public class SpitterControllerTest {
@@ -42,15 +40,10 @@ public class SpitterControllerTest {
         Spitter saved = new Spitter(24L, "Jack", "Bauer", "jbauer", "24hours");
 
         when(mockRepository.save(unsaved)).thenReturn(saved);
-
-        // TODO: Replace this with a proper mock object that doesn't get written to the filesystem
-        MockMultipartFile profilePic = new MockMultipartFile("profilePicture",
-                "foo.txt",
-                "text/plain",
-                new byte[] {});
+        MockMultipartFile mockPic = getMockProfilePic();
 
         mockMvc.perform(fileUpload("/spitter/register")
-                        .file(profilePic)
+                        .file(mockPic)
                         .param("firstName", "Jack")
                         .param("lastName", "Bauer")
                         .param("username", "jbauer")
@@ -58,24 +51,23 @@ public class SpitterControllerTest {
                 .andExpect(redirectedUrl("/spittr/spitter/jbauer"));
 
         verify(mockRepository, atLeastOnce()).save(unsaved);
+        verify(mockPic, atLeastOnce()).transferTo(any());
 
     }
 
     @Test
     public void testEmptyRegistrationFormShouldReturnOriginalPage() throws Exception {
 
-        // TODO: Replace this with a proper mock object that doesn't get written to the filesystem
-        MockMultipartFile profilePic = new MockMultipartFile("profilePicture",
-                "foo.txt",
-                "text/plain",
-                new byte[] {});
+        MockMultipartFile mockPic = getMockProfilePic();
 
         mockMvc.perform(fileUpload("/spitter/register")
-                        .file(profilePic))
+                        .file(mockPic))
                 .andExpect(view().name("registerForm"))
                 .andExpect(model().attributeHasFieldErrors("spitter", "firstName", "lastName", "username", "password"));
 
         verifyZeroInteractions(mockRepository);
+
+        verify(mockPic, never()).transferTo(any());
     }
 
 
@@ -85,6 +77,18 @@ public class SpitterControllerTest {
 
         mockMvc.perform(get("/spitter/thisisnottheuseryourelookingfor"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    /**
+     * Helper method to get a 'mock' instance of MockMultipartFile that
+     * always returns 'profilePicture' for its name.  This mock prevents
+     * unit tests attempting to write to the filesystem when transferTo()
+     * is called.
+     */
+    private MockMultipartFile getMockProfilePic() {
+        MockMultipartFile mockPic = mock(MockMultipartFile.class);
+        when(mockPic.getName()).thenReturn("profilePicture");
+        return mockPic;
     }
 
 }
