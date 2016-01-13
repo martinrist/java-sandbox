@@ -30,13 +30,15 @@
     </view-state>
 
     <action-state id="addCustomer">
-        <evaluate expression="pizzaFlowActions.addCustomer(order.customer)"/>
+        <evaluate expression="pizzaFlowActions.addCustomer(customer)"/>
         <transition to="customerReady"/>
     </action-state>
 
     <!--  End state  -->
     <end-state id="cancel"/>
-    <end-state id="customerReady"/>
+    <end-state id="customerReady">
+            <output name="customer" />
+    </end-state>
 
     <global-transitions>
         <transition on="cancel" to="cancel"/>

@@ -58,4 +58,16 @@ public class Customer implements Serializable {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
+    }
 }
