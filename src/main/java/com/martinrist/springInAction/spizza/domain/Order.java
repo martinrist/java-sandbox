@@ -37,8 +37,8 @@ public class Order implements Serializable {
         pizzas.add(pizza);
     }
 
-    public float getTotal() {
-        return 0.0f;
+    public double getTotal() {
+        return pizzas.stream().mapToDouble(Pizza::getPrice).sum();
     }
 
     public Payment getPayment() {
