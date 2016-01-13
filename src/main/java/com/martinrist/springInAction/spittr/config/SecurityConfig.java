@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/spittr/**").authenticated()
+            .antMatchers("/spittr/spittles").hasRole("SPITTER")
+            .anyRequest().permitAll()
             .and().formLogin()
             .and().httpBasic();
     }

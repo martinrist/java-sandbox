@@ -17,8 +17,6 @@ public class ConcurrentHashMapBackedSpitterRepository implements SpitterReposito
 
     private final Map<String, Spitter> repository = new ConcurrentHashMap<>();
 
-    { repository.put("backdoor", new Spitter("back", "door", "backdoor", "ilovethensa")); }
-
     /**
      * Add a new Spitter instance into the repository with the key as
      * specified by the username.  Returns the Spitter originally provided.
