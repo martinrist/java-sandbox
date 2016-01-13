@@ -1,5 +1,8 @@
 package com.martinrist.springInAction.spittr.config;
 
+import com.martinrist.springInAction.spittr.data.SpitterRepository;
+import com.martinrist.springInAction.spittr.security.SpittrUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private SpitterRepository spitterRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -20,8 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-            .withUser("user").password("password").roles("USER").and()
-            .withUser("admin").password("admin").roles("ADMIN");
+        auth.userDetailsService(new SpittrUserService(spitterRepository));
     }
 }
