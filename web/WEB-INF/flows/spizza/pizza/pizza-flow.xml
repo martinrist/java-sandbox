@@ -25,7 +25,7 @@
         <transition to="thankCustomer" />
     </action-state>
 
-    <view-state id="thankCustomer" view="thankCustomer">
+    <view-state id="thankCustomer">
         <transition to="endState" />
     </view-state>
 

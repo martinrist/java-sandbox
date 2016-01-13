@@ -1,14 +1,10 @@
-<html xmlns:jsp="http://java.sun.com/JSP/page">
-    <jsp:output omit-xml-declaration="yes"/>
-    <jsp:directive.page contentType="text/html; charset=UTF-8" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<html>
 
-    <head>
-        <title>Spizza</title>
-    </head>
+<head><title>Spring Pizza</title></head>
 
-    <body>
-        <h2>Thank you for your order!</h2>
-        <![CDATA[<a href='${flowExecutionUrl}&_eventId=finished'>Finish</a>]]>
-    </body>
-
+<body>
+<h2>Thank you for your order!</h2>
+<a href='${flowExecutionUrl}&_eventId=finished'>Finish</a>
+</body>
 </html>

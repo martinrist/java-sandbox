@@ -4,6 +4,7 @@ import org.apache.commons.lang.WordUtils;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Pizza implements Serializable{
 
@@ -57,4 +58,9 @@ public class Pizza implements Serializable{
 
     }
 
+    @Override
+    public String toString() {
+        String toppings = String.join(", ", getToppings().stream().map(Topping::toString).collect(Collectors.toList()));
+        return String.format("%s - %s (price = $%.2f)", size, toppings, getPrice());
+    }
 }
