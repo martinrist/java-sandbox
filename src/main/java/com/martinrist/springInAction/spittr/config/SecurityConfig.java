@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/spittr/spittles").hasRole("SPITTER")
             .anyRequest().permitAll()
             .and().formLogin()
-            .and().httpBasic();
+            .and().httpBasic()
+            .and().logout().logoutSuccessUrl("/spittr/");
     }
 
     @Override
