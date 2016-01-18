@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
@@ -26,13 +27,12 @@ public class RootConfig {
     }
 
     @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource ds = new DriverManagerDataSource();
-        ds.setDriverClassName("org.postgresql.Driver");
-        ds.setUrl("jdbc:postgresql://localhost:5432/spittr");
-        ds.setUsername("spittr");
-        ds.setPassword("password");
-        return ds;
+    public JndiObjectFactoryBean dataSource() {
+        JndiObjectFactoryBean factoryBean = new JndiObjectFactoryBean();
+        factoryBean.setJndiName("jdbc/SpittrDS");
+        factoryBean.setResourceRef(true);
+        factoryBean.setProxyInterface(javax.sql.DataSource.class);
+        return factoryBean;
     }
 
     @Bean
