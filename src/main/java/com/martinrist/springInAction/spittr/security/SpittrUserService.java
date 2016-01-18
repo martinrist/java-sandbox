@@ -2,6 +2,7 @@ package com.martinrist.springInAction.spittr.security;
 
 import com.martinrist.springInAction.spittr.data.SpitterRepository;
 import com.martinrist.springInAction.spittr.domain.Spitter;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +24,12 @@ public class SpittrUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Spitter spitter = repository.findByUserName(username);
+        Spitter spitter;
+        try {
+            spitter = repository.findByUserName(username);
+        } catch (DataAccessException dae) {
+            throw new UsernameNotFoundException("User '" + username + "' not found.");
+        }
 
         if (spitter != null) {
 
