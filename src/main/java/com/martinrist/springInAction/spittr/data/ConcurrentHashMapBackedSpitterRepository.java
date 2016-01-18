@@ -1,7 +1,6 @@
 package com.martinrist.springInAction.spittr.data;
 
 import com.martinrist.springInAction.spittr.domain.Spitter;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -12,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * Keys in the map are the username, values are instances of the Spitter.
  */
 @Repository
-@Primary
 public class ConcurrentHashMapBackedSpitterRepository implements SpitterRepository {
 
     private final Map<String, Spitter> repository = new ConcurrentHashMap<>();
