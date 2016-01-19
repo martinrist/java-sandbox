@@ -2,7 +2,6 @@ package com.martinrist.springInAction.spittr.data;
 
 import com.martinrist.springInAction.spittr.domain.Spitter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
  * Spring's JdbcTemplate.
  */
 @Repository
-@Primary
 public class JdbcSpitterRepository implements SpitterRepository {
 
     private JdbcOperations jdbcOperations;

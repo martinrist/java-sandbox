@@ -4,28 +4,37 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
  * Domain object that represents a 'Spitter', a user of the application.
  */
+@Entity
 public class Spitter {
 
+    @Id
+    @Column(name="spitter_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="firstname")
     @NotNull
     @Size(min=2, max=30, message="{firstName.size}")
     private String firstName;
 
+    @Column(name="lastname")
     @NotNull
     @Size(min=2, max=30, message="{lastName.size}")
     private String lastName;
 
+    @Column(name="username")
     @NotNull
     @Size(min=5, max=16, message="{username.size}")
     private String username;
 
+    @Column(name="password")
     @NotNull
     @Size(min=5, max=25, message="{password.size}")
     private String password;
