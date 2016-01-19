@@ -2,10 +2,12 @@ package com.martinrist.springInAction.spittr.config;
 
 import com.martinrist.springInAction.spittr.domain.Spitter;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
@@ -63,5 +65,10 @@ public class RootConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
+    }
+
+    @Bean
+    public BeanPostProcessor persistenceTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
     }
 }
