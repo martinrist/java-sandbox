@@ -8,6 +8,7 @@
 	<properties>
             <spring.version>4.2.3.RELEASE</spring.version>
 			<spring.security.version>4.0.3.RELEASE</spring.security.version>
+			<hibernate.version>4.3.11.Final</hibernate.version>
     </properties>
 
 	<dependencies>
@@ -85,7 +86,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.3.11.Final</version>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>

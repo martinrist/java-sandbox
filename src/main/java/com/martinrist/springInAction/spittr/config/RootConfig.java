@@ -12,10 +12,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -29,6 +36,8 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"com.martinrist.springInAction.spittr"},
                excludeFilters = {@ComponentScan.Filter(type= FilterType.ANNOTATION, value = EnableWebMvc.class)})
 public class RootConfig {
+
+    private static final String HIBERNATE_DIALECT = "org.hibernate.dialect.PostgreSQL9Dialect";
 
     @Bean
     public String imageUploadDir() {
@@ -55,20 +64,52 @@ public class RootConfig {
         sfb.setDataSource(dataSource);
         sfb.setAnnotatedClasses(Spitter.class);
         Properties props = new Properties();
-        props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL9Dialect");
+        props.setProperty("hibernate.dialect", HIBERNATE_DIALECT);
         sfb.setHibernateProperties(props);
         return sfb;
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
+    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
     }
 
     @Bean
+    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory emf) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(emf);
+        return transactionManager;
+    }
+
+    @Bean
     public BeanPostProcessor persistenceTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+                                                                       JpaVendorAdapter jpaVendorAdapter) {
+        LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
+        emfb.setDataSource(dataSource);
+        emfb.setJpaVendorAdapter(jpaVendorAdapter);
+        emfb.setPackagesToScan("com.martinrist.springInAction.spittr.domain");
+        return emfb;
+    }
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setDatabase(Database.POSTGRESQL);
+        adapter.setShowSql(true);
+        adapter.setGenerateDdl(true);
+        adapter.setDatabasePlatform(HIBERNATE_DIALECT);
+        return adapter;
+    }
+
+    @Bean
+    public PersistenceAnnotationBeanPostProcessor paPostProcessor() {
+        return new PersistenceAnnotationBeanPostProcessor();
     }
 }

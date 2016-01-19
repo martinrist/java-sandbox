@@ -5,10 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,8 +17,7 @@ import java.util.List;
  * Spring's Hibernate integration.
  */
 @Repository
-@Transactional
-@Primary
+@Transactional("hibernateTransactionManager")
 public class HibernateSpitterRepository implements SpitterRepository {
 
     private SessionFactory sessionFactory;

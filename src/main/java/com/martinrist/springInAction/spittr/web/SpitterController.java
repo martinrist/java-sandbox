@@ -51,7 +51,7 @@ public class SpitterController {
             return "registerForm";
         }
 
-        spitterRepository.save(spitter);
+        spitter = spitterRepository.save(spitter);
 
         if (!profilePicture.isEmpty()) {
             try {
