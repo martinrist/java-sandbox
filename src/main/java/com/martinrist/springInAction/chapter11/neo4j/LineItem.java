@@ -1,9 +1,6 @@
 package com.martinrist.springInAction.chapter11.neo4j;
 
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.StartNode;
+import org.springframework.data.neo4j.annotation.*;
 
 @RelationshipEntity(type="HAS_LINE_ITEM_FOR")
 public class LineItem {
@@ -12,9 +9,11 @@ public class LineItem {
     private Long id;
 
     @StartNode
+    @Fetch
     private Order order;
 
     @EndNode
+    @Fetch
     private Product product;
 
     private int quantity;

@@ -1,5 +1,6 @@
 package com.martinrist.springInAction.chapter11.neo4j;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,8 +68,20 @@ public class Neo4jIT {
         neo4j.save(lineItem);
 
         assertThat(lineItem, notNullValue());
-        assertThat(lineItem.getOrder().getId(), is(order.getId()));
-        assertThat(lineItem.getProduct().getId(), is(product.getId()));
+        assertThat(lineItem.getOrder(), is(order));
+        assertThat(lineItem.getProduct(), is(product));
+    }
+
+    @Test
+    public void createRelationshipThenFetch() {
+        LineItem lineItem = neo4j.createRelationshipBetween(order, product, LineItem.class, "HAS_LINE_ITEM_FOR", false);
+        lineItem.setQuantity(5);
+        neo4j.save(lineItem);
+
+        Order newOrder = neo4j.findOne(order.getId(), Order.class);
+
+        assertThat(newOrder.getLineItems(), hasSize(1));
+        assertThat(newOrder.getLineItems().get(0).getQuantity(), is(5));
     }
 
 

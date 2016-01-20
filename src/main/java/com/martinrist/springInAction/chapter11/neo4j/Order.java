@@ -4,6 +4,9 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
+
+import java.util.List;
 
 @NodeEntity
 public class Order {
@@ -14,6 +17,17 @@ public class Order {
     private String customer;
 
     private String type;
+
+    public List<LineItem> getLineItems() {
+        return lineItems;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    @RelatedToVia(type = "HAS_LINE_ITEM_FOR")
+    private List<LineItem> lineItems;
 
     public String getCustomer() {
         return customer;
