@@ -1,7 +1,7 @@
 package com.martinrist.springInAction.spittr.web;
 
-import com.martinrist.springInAction.spittr.data.SpittleRepository;
 import com.martinrist.springInAction.spittr.domain.Spittle;
+import com.martinrist.springInAction.spittr.service.SpitterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,13 +21,13 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 public class SpittleControllerTest {
 
-    private SpittleRepository mockRepository;
+    private SpitterService mockService;
     private MockMvc mockMvc;
 
     @Before
     public void setUp() {
-        mockRepository = mock(SpittleRepository.class);
-        SpittleController controller = new SpittleController(mockRepository);
+        mockService = mock(SpitterService.class);
+        SpittleController controller = new SpittleController(mockService);
         mockMvc = standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
                 .build();
@@ -38,7 +38,7 @@ public class SpittleControllerTest {
 
         List<Spittle> expectedSpittles = createSpittleList(20);
 
-        when(mockRepository.findSpittles(Long.valueOf(SpittleController.MAX_ID), 20)).thenReturn(expectedSpittles);
+        when(mockService.getRecentSpittles(20)).thenReturn(expectedSpittles);
 
         mockMvc.perform(get("/spittles"))
                 .andExpect(view().name("spittles"))
@@ -52,7 +52,7 @@ public class SpittleControllerTest {
 
         List<Spittle> expectedSpittles = createSpittleList(50);
 
-        when(mockRepository.findSpittles(238900, 50)).thenReturn(expectedSpittles);
+        when(mockService.getRecentSpittles(50)).thenReturn(expectedSpittles);
 
         mockMvc.perform(get("/spittles?max=238900&count=50"))
                 .andExpect(view().name("spittles"))
@@ -66,7 +66,7 @@ public class SpittleControllerTest {
 
         Spittle expectedSpittle = new Spittle("Hello", new Date());
 
-        when(mockRepository.findSpittle(12345)).thenReturn(expectedSpittle);
+        when(mockService.getSpittleById(12345)).thenReturn(expectedSpittle);
 
         mockMvc.perform(get("/spittles/12345"))
                 .andExpect(view().name("spittle"))

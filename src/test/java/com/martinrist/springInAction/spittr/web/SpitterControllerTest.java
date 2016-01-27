@@ -1,7 +1,7 @@
 package com.martinrist.springInAction.spittr.web;
 
-import com.martinrist.springInAction.spittr.data.SpitterRepository;
 import com.martinrist.springInAction.spittr.domain.Spitter;
+import com.martinrist.springInAction.spittr.service.SpitterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
@@ -16,14 +16,14 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 public class SpitterControllerTest {
 
-    private SpitterRepository mockRepository;
+    private SpitterService mockService;
     private MockMvc mockMvc;
 
 
     @Before
     public void setUp() {
-        mockRepository = mock(SpitterRepository.class);
-        SpitterController controller = new SpitterController(mockRepository);
+        mockService = mock(SpitterService.class);
+        SpitterController controller = new SpitterController(mockService);
         mockMvc = standaloneSetup(controller).build();
     }
 
@@ -37,9 +37,7 @@ public class SpitterControllerTest {
     public void testShouldProcessRegistration() throws Exception {
 
         Spitter unsaved = new Spitter("Jack", "Bauer", "jbauer", "24hours");
-        Spitter saved = new Spitter(24L, "Jack", "Bauer", "jbauer", "24hours");
 
-        when(mockRepository.save(unsaved)).thenReturn(saved);
         MockMultipartFile mockPic = getMockProfilePic();
 
         mockMvc.perform(fileUpload("/spitter/register")
@@ -50,7 +48,7 @@ public class SpitterControllerTest {
                         .param("password", "24hours"))
                 .andExpect(redirectedUrl("/spittr/spitter/jbauer"));
 
-        verify(mockRepository, atLeastOnce()).save(unsaved);
+        verify(mockService, atLeastOnce()).saveSpitter(unsaved);
         verify(mockPic, atLeastOnce()).transferTo(any());
 
     }
@@ -65,7 +63,7 @@ public class SpitterControllerTest {
                 .andExpect(view().name("registerForm"))
                 .andExpect(model().attributeHasFieldErrors("spitter", "firstName", "lastName", "username", "password"));
 
-        verifyZeroInteractions(mockRepository);
+        verifyZeroInteractions(mockService);
 
         verify(mockPic, never()).transferTo(any());
     }

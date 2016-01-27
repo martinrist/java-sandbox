@@ -1,7 +1,7 @@
 package com.martinrist.springInAction.spittr.web;
 
-import com.martinrist.springInAction.spittr.data.SpittleRepository;
 import com.martinrist.springInAction.spittr.domain.Spittle;
+import com.martinrist.springInAction.spittr.service.SpitterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,23 +27,22 @@ public class SpittleController {
      */
     static final String MAX_ID = "9999999999999999";
 
-    private SpittleRepository spittleRepository;
+    private SpitterService service;
 
     @Autowired
-    public SpittleController(SpittleRepository spittleRepository) {
-        this.spittleRepository = spittleRepository;
+    public SpittleController(SpitterService service) {
+        this.service = service;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Spittle> spittles(@RequestParam(value="max", defaultValue = MAX_ID) long max,
-                                  @RequestParam(value="count", defaultValue = "20") int count) {
-        return spittleRepository.findSpittles(max, count);
+    public List<Spittle> spittles(@RequestParam(value="count", defaultValue = "20") int count) {
+        return service.getRecentSpittles(count);
     }
 
     @RequestMapping(path = "/{spittleId}", method = RequestMethod.GET)
     public String spittle(@PathVariable("spittleId") long spittleId, Model model) {
 
-        model.addAttribute(spittleRepository.findSpittle(spittleId));
+        model.addAttribute(service.getSpittleById(spittleId));
         return "spittle";
     }
 }

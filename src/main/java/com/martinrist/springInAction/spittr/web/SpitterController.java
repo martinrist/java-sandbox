@@ -1,8 +1,8 @@
 package com.martinrist.springInAction.spittr.web;
 
-import com.martinrist.springInAction.spittr.data.SpitterRepository;
 import com.martinrist.springInAction.spittr.domain.Spitter;
 import com.martinrist.springInAction.spittr.exception.SpitterNotFoundException;
+import com.martinrist.springInAction.spittr.service.SpitterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,14 +28,14 @@ public class SpitterController {
 
     public static final String DEFAULT_UPLOAD_DIR = "/tmp/spittr/profiles";
 
-    private SpitterRepository spitterRepository;
+    private SpitterService service;
 
     @Autowired(required = false)
     private String imageUploadDir = DEFAULT_UPLOAD_DIR;
 
     @Autowired
-    public SpitterController(SpitterRepository spitterRepository) {
-        this.spitterRepository = spitterRepository;
+    public SpitterController(SpitterService service) {
+        this.service = service;
     }
 
     @RequestMapping(value="/register", method=GET)
@@ -51,7 +51,7 @@ public class SpitterController {
             return "registerForm";
         }
 
-        spitter = spitterRepository.save(spitter);
+        service.saveSpitter(spitter);
 
         if (!profilePicture.isEmpty()) {
             try {
@@ -69,7 +69,7 @@ public class SpitterController {
 
     @RequestMapping(value="/{username}", method=GET)
     public String showSpitterProfile(@PathVariable String username, Model model) {
-        Spitter spitter = spitterRepository.findByUserName(username);
+        Spitter spitter = service.getSpitter(username);
         if (spitter == null) {
             throw new SpitterNotFoundException("Unable to locate Spitter with username " + username);
         }
