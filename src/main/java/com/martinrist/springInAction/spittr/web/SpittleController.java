@@ -16,17 +16,6 @@ import java.util.List;
 @RequestMapping("/spittles")
 public class SpittleController {
 
-    /**
-     * The maximum allowable value of the 'max' parameter.  Ideally we'd use
-     * something like Long.toString(Long.MAX_VALUE) here, but this can't be
-     * assigned to @RequestParam's defaultValue attribute, because it isn't
-     * a compile-time constant.
-     *
-     * This has package level access because it needs to be accessible from
-     * the unit tests, but not outside the package.
-     */
-    static final String MAX_ID = "9999999999999999";
-
     private SpitterService service;
 
     @Autowired
