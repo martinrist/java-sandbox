@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -36,12 +37,17 @@ public class SpittleRESTController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<Spittle> saveSpittle(@RequestBody Spittle spittle) {
+    public ResponseEntity<Spittle> saveSpittle(@RequestBody Spittle spittle,
+                                               UriComponentsBuilder ucb) {
 
         Spittle savedSpittle = service.saveSpittle(spittle);
 
         HttpHeaders headers = new HttpHeaders();
-        URI locationUri = URI.create("http://localhost:8080/spittr/api/spittles/" + savedSpittle.getId());
+
+        URI locationUri = ucb.path("/api/spittles/")
+                             .path(String.valueOf(savedSpittle.getId()))
+                             .build().toUri();
+
         headers.setLocation(locationUri);
 
         return new ResponseEntity<>(savedSpittle, headers, HttpStatus.CREATED);
