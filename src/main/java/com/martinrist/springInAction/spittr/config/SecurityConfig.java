@@ -23,7 +23,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().permitAll()
             .and().formLogin()
             .and().httpBasic()
-            .and().logout().logoutSuccessUrl("/spittr/");
+            .and().logout().logoutSuccessUrl("/spittr/")
+            .and().csrf().ignoringAntMatchers("/spittr/api/**");
     }
 
     @Override
