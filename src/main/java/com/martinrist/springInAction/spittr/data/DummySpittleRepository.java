@@ -13,6 +13,8 @@ public class DummySpittleRepository implements SpittleRepository {
 
     static long nextSpittleId = 1000;
 
+    public static final long SPITTLE_ID_OF_THE_BEAST = 666;
+
     private static final Logger LOGGER = Logger.getLogger(DummySpittleRepository.class);
 
     @Override
@@ -30,6 +32,10 @@ public class DummySpittleRepository implements SpittleRepository {
     @Override
     public Spittle findSpittle(long id) {
         LOGGER.info(String.format("Finding Spittle with ID %d", id));
+        if (id == SPITTLE_ID_OF_THE_BEAST) {
+            LOGGER.info(String.format("Spittle ID %d not found - returning null", id));
+            return null;
+        }
         return new Spittle(id, "Spittle " + id, new Date());
     }
 
