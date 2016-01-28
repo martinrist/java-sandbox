@@ -5,10 +5,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
@@ -21,8 +25,23 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean
-    public ViewResolver viewResolver() {
+    public ViewResolver tilesViewResolver() {
         return new TilesViewResolver();
+    }
+
+    @Bean
+    public ViewResolver cnViewResolver() {
+        return new ContentNegotiatingViewResolver();
+    }
+
+    @Bean
+    public ViewResolver beanNameViewResolver() {
+        return new BeanNameViewResolver();
+    }
+
+    @Bean
+    public View spittles() {
+        return new MappingJackson2JsonView();
     }
 
     @Bean
