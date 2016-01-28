@@ -24,8 +24,8 @@ public class DefaultSpitterService implements SpitterService {
     }
 
     @Override
-    public void saveSpittle(Spittle spittle) {
-        spittleRepository.save(spittle);
+    public Spittle saveSpittle(Spittle spittle) {
+        return spittleRepository.save(spittle);
     }
 
     @Override

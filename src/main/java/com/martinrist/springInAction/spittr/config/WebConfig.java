@@ -21,7 +21,8 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.martinrist.springInAction.spittr.web")
+@ComponentScan({ "com.martinrist.springInAction.spittr.web",
+                 "com.martinrist.springInAction.spittr.ws" })
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean

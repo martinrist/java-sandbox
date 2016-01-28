@@ -8,7 +8,7 @@ import java.util.List;
 public interface SpitterService {
 
     List<Spittle> getRecentSpittles(int count);
-    void saveSpittle(Spittle spittle);
+    Spittle saveSpittle(Spittle spittle);
     void saveSpitter(Spitter spitter);
     Spitter getSpitter(long id);
     void startFollowing(Spitter follower, Spitter followee);
