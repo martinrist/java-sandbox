@@ -4,9 +4,12 @@ import com.martinrist.springInAction.spittr.domain.Spittle;
 import com.martinrist.springInAction.spittr.exception.SpittleNotFoundException;
 import com.martinrist.springInAction.spittr.service.SpitterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -33,8 +36,15 @@ public class SpittleRESTController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-    public Spittle saveSpittle(@RequestBody Spittle spittle) {
-        return service.saveSpittle(spittle);
+    public ResponseEntity<Spittle> saveSpittle(@RequestBody Spittle spittle) {
+
+        Spittle savedSpittle = service.saveSpittle(spittle);
+
+        HttpHeaders headers = new HttpHeaders();
+        URI locationUri = URI.create("http://localhost:8080/spittr/api/spittles/" + savedSpittle.getId());
+        headers.setLocation(locationUri);
+
+        return new ResponseEntity<>(savedSpittle, headers, HttpStatus.CREATED);
     }
 
     @ExceptionHandler(SpittleNotFoundException.class)
