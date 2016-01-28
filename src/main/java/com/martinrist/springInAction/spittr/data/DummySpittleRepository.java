@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class DummySpittleRepository implements SpittleRepository {
 
-    static long SPITTLE_ID_COUNTER = 1000;
+    static long nextSpittleId = 1000;
 
     private static final Logger LOGGER = Logger.getLogger(DummySpittleRepository.class);
 
@@ -35,7 +35,9 @@ public class DummySpittleRepository implements SpittleRepository {
 
     @Override
     public Spittle save(Spittle spittle) {
-        Spittle result = new Spittle(SPITTLE_ID_COUNTER++, "Spittle " + SPITTLE_ID_COUNTER, new Date());
+        long newId = nextSpittleId++;
+        Spittle result = new Spittle(newId, "Spittle " + newId, new Date());
+        LOGGER.info(String.format("Adding new Spittle: %s", result));
         return result;
     }
 
