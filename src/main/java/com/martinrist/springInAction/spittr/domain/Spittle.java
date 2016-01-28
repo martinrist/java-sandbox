@@ -12,11 +12,13 @@ import java.util.Date;
  */
 public class Spittle {
 
-    private final Long id;
-    private final String message;
-    private final Date time;
+    private Long id;
+    private String message;
+    private Date time;
     private Double latitude;
     private Double longitude;
+
+    public Spittle() {}
 
     public Spittle(String message, Date time) {
         this(null, message, time);
@@ -32,6 +34,26 @@ public class Spittle {
         this.time = time;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public Long getId() {
