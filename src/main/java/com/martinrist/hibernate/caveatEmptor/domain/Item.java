@@ -3,6 +3,9 @@ package com.martinrist.hibernate.caveatEmptor.domain;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
@@ -11,14 +14,20 @@ import java.util.*;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Item implements Serializable {
 
+    @NotNull
+    @Size(min = 2, max = 255, message = "Name is required, maximum 255 characters")
     private String name;
+
     private String description;
     private Date createdOn;
     private boolean verified;
     private AuctionType auctionType;
     private BigDecimal initialPrice;
     private Date auctionStart;
+
+    @Future
     private Date auctionEnd;
+
     private Set<Bid> bids = new HashSet<>();
 
     public Item() {
