@@ -7,6 +7,8 @@
 
         <jta-data-source>myDS</jta-data-source>
         <class>com.martinrist.hibernate.chapter2.Message</class>
+        <class>com.martinrist.hibernate.chapter4.DefaultGenerationEntity</class>
+        <class>com.martinrist.hibernate.chapter4.IdentityGenerationEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
