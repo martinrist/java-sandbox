@@ -1,7 +1,5 @@
 package com.martinrist.hibernate.caveatEmptor.domain;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -11,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Item implements Serializable {
 
     @Id
@@ -42,6 +39,9 @@ public class Item implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date auctionEnd;
 
+    private BigDecimal buyNowPrice;
+
+    @Transient
     private Set<Bid> bids = new HashSet<>();
 
     public Item() {
@@ -123,6 +123,14 @@ public class Item implements Serializable {
 
     private void setBids(Set<Bid> bids) {
         this.bids = bids;
+    }
+
+    public BigDecimal getBuyNowPrice() {
+        return buyNowPrice;
+    }
+
+    public void setBuyNowPrice(BigDecimal buyNowPrice) {
+        this.buyNowPrice = buyNowPrice;
     }
 
     public void addBid(Bid bid) {

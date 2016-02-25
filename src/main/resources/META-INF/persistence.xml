@@ -8,24 +8,41 @@
         <jta-data-source>myDS</jta-data-source>
         <class>com.martinrist.hibernate.chapter2.Message</class>
         <class>com.martinrist.hibernate.chapter4.DefaultGenerationEntity</class>
-        <class>com.martinrist.hibernate.chapter4.IdentityGenerationEntity</class>
+        <class>com.martinrist.hibernate.chapter4.IdentityGenerationEntity
+        </class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="drop-and-create"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="CaveatEmptorPU">
+
+        <jta-data-source>myDS</jta-data-source>
 
         <class>com.martinrist.hibernate.caveatEmptor.domain.Address</class>
         <class>com.martinrist.hibernate.caveatEmptor.domain.AuctionType</class>
         <class>com.martinrist.hibernate.caveatEmptor.domain.Bid</class>
         <class>com.martinrist.hibernate.caveatEmptor.domain.Item</class>
         <class>com.martinrist.hibernate.caveatEmptor.domain.User</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain</class>
 
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action"
-                      value="drop-and-create" />
-            <property name="hibernate.format_sql" value="true" />
-            <property name="hibernate.use_sql_comments" value="true" />
+                      value="drop-and-create"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
             <property name="hibernate.physical_naming_strategy"
                       value="com.martinrist.hibernate.caveatEmptor.shared.CENamingStrategy"/>
         </properties>
+
     </persistence-unit>
 
 </persistence>

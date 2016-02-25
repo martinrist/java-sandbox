@@ -3,11 +3,10 @@ package com.martinrist.hibernate.chapter4;
 import com.martinrist.hibernate.shared.JPATest;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.transaction.UserTransaction;
 
 import static org.hamcrest.Matchers.notNullValue;
@@ -16,19 +15,22 @@ import static org.junit.Assert.assertThat;
 
 public class IdGenerationTest extends JPATest {
 
-    private EntityManagerFactory emf;
     private EntityManager em;
+
+    @BeforeClass
+    public static void configure() throws Exception {
+        configurePersistenceUnit("HelloWorldPU");
+    }
+
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("HelloWorldPU");
-        em = emf.createEntityManager();
+        em = JPA.createEntityManager();
     }
 
     @After
     public void tearDown() {
         em.close();
-        emf.close();
     }
 
     @Test
