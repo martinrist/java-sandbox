@@ -9,6 +9,13 @@
         <class>com.martinrist.hibernate.chapter2.Message</class>
         <class>com.martinrist.hibernate.chapter4.DefaultGenerationEntity</class>
         <class>com.martinrist.hibernate.chapter4.IdentityGenerationEntity</class>
+
+        <class>com.martinrist.hibernate.caveatEmptor.domain.Address</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.AuctionType</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.Bid</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.Item</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.User</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
@@ -16,6 +23,8 @@
                       value="drop-and-create" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.use_sql_comments" value="true" />
+            <property name="hibernate.physical_naming_strategy"
+                      value="com.martinrist.hibernate.caveatEmptor.shared.CENamingStrategy"/>
         </properties>
     </persistence-unit>
 
