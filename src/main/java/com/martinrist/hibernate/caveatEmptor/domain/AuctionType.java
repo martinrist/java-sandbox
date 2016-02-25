@@ -1,5 +1,7 @@
 package com.martinrist.hibernate.caveatEmptor.domain;
 
 public enum AuctionType {
-    TYPE1, TYPE2
+    HIGHEST_BID,
+    LOWEST_BID,
+    FIXED_PRICE
 }
