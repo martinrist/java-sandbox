@@ -7,10 +7,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class BankAccount extends BillingDetails {
 
-    @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
-    private Long id;
-
     @NotNull
     private String account;
 
@@ -27,10 +23,6 @@ public class BankAccount extends BillingDetails {
         this.account = account;
         this.bankName = bankName;
         this.swift = swift;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getAccount() {

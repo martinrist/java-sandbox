@@ -10,10 +10,6 @@ import javax.validation.constraints.NotNull;
         column = @Column(name = "CC_OWNER", nullable = false))
 public class CreditCard extends BillingDetails {
 
-    @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
-    private Long id;
-
     @NotNull
     private String cardNumber;
 
@@ -30,10 +26,6 @@ public class CreditCard extends BillingDetails {
         this.cardNumber = cardNumber;
         this.expMonth = expMonth;
         this.expYear = expYear;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getCardNumber() {
