@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 import java.math.BigDecimal;
 
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -48,6 +49,24 @@ public class ItemPersistenceTest extends JPATest {
     }
 
 
+    @Test
+    public void testPersistItem_BuyNowPriceConversion() throws Exception {
+
+        UserTransaction tx = TM.getUserTransaction();
+        tx.begin();
+
+        Item i = new Item();
+        i.setName("Item Name");
+        i.setInitialPrice(BigDecimal.ZERO);
+        i.setBuyNowPrice(MonetaryAmount.fromString("1.50 GBP"));
+        em.persist(i);
+        tx.commit();
+
+        Item retrievedItem = em.createQuery("select i from Item i where id = :id", Item.class)
+                .setParameter("id", i.getId()).getSingleResult();
+
+        assertThat(retrievedItem.getBuyNowPrice(), is(MonetaryAmount.fromString("1.50 GBP")));
+    }
 
 
 

@@ -1,5 +1,7 @@
 package com.martinrist.hibernate.caveatEmptor.domain;
 
+import com.martinrist.hibernate.caveatEmptor.converter.MonetaryAmountConverter;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -39,7 +41,10 @@ public class Item implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date auctionEnd;
 
-    private BigDecimal buyNowPrice;
+    @Convert(converter = MonetaryAmountConverter.class,
+             disableConversion = false)
+    @Column(name = "PRICE", length = 63)
+    private MonetaryAmount buyNowPrice;
 
     @Transient
     private Set<Bid> bids = new HashSet<>();
@@ -125,11 +130,11 @@ public class Item implements Serializable {
         this.bids = bids;
     }
 
-    public BigDecimal getBuyNowPrice() {
+    public MonetaryAmount getBuyNowPrice() {
         return buyNowPrice;
     }
 
-    public void setBuyNowPrice(BigDecimal buyNowPrice) {
+    public void setBuyNowPrice(MonetaryAmount buyNowPrice) {
         this.buyNowPrice = buyNowPrice;
     }
 
