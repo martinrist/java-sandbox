@@ -75,4 +75,12 @@ public class User implements Serializable {
         return null;
     }
 
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
 }
