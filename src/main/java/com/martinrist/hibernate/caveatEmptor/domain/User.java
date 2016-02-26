@@ -1,6 +1,8 @@
 package com.martinrist.hibernate.caveatEmptor.domain;
 
 
+import com.martinrist.hibernate.caveatEmptor.converter.ZipcodeConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +19,8 @@ public class User implements Serializable {
     private String firstname;
     private String lastname;
 
+    @Convert(converter = ZipcodeConverter.class,
+             attributeName = "zipcode")
     private Address homeAddress;
 
     @Embedded
@@ -28,6 +32,8 @@ public class User implements Serializable {
             @AttributeOverride(name = "city",
                     column = @Column(name = "BILLING_CITY"))
     })
+    @Convert(converter = ZipcodeConverter.class,
+            attributeName = "zipcode")
     private Address billingAddress;
 
     public User() {
