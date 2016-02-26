@@ -30,6 +30,10 @@
         <class>com.martinrist.hibernate.caveatEmptor.domain.Bid</class>
         <class>com.martinrist.hibernate.caveatEmptor.domain.Item</class>
         <class>com.martinrist.hibernate.caveatEmptor.domain.User</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.BillingDetails</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.CreditCard</class>
+        <class>com.martinrist.hibernate.caveatEmptor.domain.BankAccount</class>
+
         <class>com.martinrist.hibernate.caveatEmptor.domain</class>
 
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
