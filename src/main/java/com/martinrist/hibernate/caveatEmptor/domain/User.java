@@ -6,6 +6,8 @@ import com.martinrist.hibernate.caveatEmptor.converter.ZipcodeConverter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -35,6 +37,13 @@ public class User implements Serializable {
     @Convert(converter = ZipcodeConverter.class,
             attributeName = "zipcode")
     private Address billingAddress;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BillingDetails defaultBilling;
+
+    @OneToMany(mappedBy = "user")
+    private Set<BillingDetails> billingDetails = new HashSet<>();
 
     public User() {
 

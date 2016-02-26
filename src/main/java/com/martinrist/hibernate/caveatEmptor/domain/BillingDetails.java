@@ -4,9 +4,12 @@ package com.martinrist.hibernate.caveatEmptor.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@MappedSuperclass
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class BillingDetails {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @NotNull
     private String owner;
