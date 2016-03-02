@@ -25,6 +25,11 @@ public class MonetaryAmount implements Serializable {
 
 
     public static MonetaryAmount fromString(String s) {
+
+        if (s == null || s.isEmpty()) {
+            return null;
+        }
+
         String[] split = s.split(" ");
         return new MonetaryAmount(new BigDecimal(split[0]), Currency.getInstance(split[1]));
     }

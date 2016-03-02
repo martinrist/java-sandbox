@@ -52,6 +52,15 @@ public class Item implements Serializable {
     public Item() {
     }
 
+    public static Item newInstance(String name) {
+
+        Item i = new Item();
+        i.setName(name);
+        i.setCreatedOn(new Date());
+        i.setInitialPrice(BigDecimal.ZERO);
+        return i;
+    }
+
     public Long getId() {
         return id;
     }
