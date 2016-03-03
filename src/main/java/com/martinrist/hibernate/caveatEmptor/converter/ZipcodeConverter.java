@@ -19,7 +19,7 @@ public class ZipcodeConverter implements AttributeConverter<Zipcode, String> {
     @Override
     public Zipcode convertToEntityAttribute(String dbData) {
 
-        if (dbData == null) return null;
+        if (dbData == null || dbData.isEmpty()) return null;
 
         if (dbData.length() == 5) {
             return new GermanZipcode(dbData);

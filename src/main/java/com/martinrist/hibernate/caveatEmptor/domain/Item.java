@@ -49,6 +49,17 @@ public class Item implements Serializable {
     @Transient
     private Set<Bid> bids = new HashSet<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User seller;
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
+
     public Item() {
     }
 

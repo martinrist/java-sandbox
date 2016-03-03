@@ -38,7 +38,6 @@ public class User implements Serializable {
             attributeName = "zipcode")
     private Address billingAddress;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     private BillingDetails defaultBilling;
 
@@ -47,6 +46,12 @@ public class User implements Serializable {
 
     public User() {
 
+    }
+
+    public static User newInstance(String username) {
+        User user = new User();
+        user.setUsername(username);
+        return user;
     }
 
     public Long getId() {
