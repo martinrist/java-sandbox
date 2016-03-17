@@ -1,4 +1,4 @@
-package com.martinrist.effectiveJava.chapter2.nonInstantiable;
+package com.martinrist.effectiveJava.chapter2.nonInstantiability;
 
 /**
  * Example utility class that has been explicitly made non-instantiable
