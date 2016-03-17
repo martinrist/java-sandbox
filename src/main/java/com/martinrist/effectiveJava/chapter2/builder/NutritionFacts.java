@@ -13,7 +13,7 @@ public class NutritionFacts {
     private final int sodium;            // optional
     private final int carbohydrate;      // optional
 
-    public static class Builder {
+    public static class Builder implements com.martinrist.effectiveJava.chapter2.builder.Builder<NutritionFacts> {
 
         // Required parameters - set in the builder's constructor
         private final int servingSize;
