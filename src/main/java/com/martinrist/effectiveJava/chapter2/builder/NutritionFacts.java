@@ -51,8 +51,26 @@ public class NutritionFacts {
         }
 
         public NutritionFacts build() {
-            return new NutritionFacts(this);
+            NutritionFacts nutritionFacts = new NutritionFacts(this);
+            validateConstraints(nutritionFacts);
+            return nutritionFacts;
         }
+
+        private void validateConstraints(NutritionFacts nutritionFacts) {
+            validatePositive("servingSize", nutritionFacts.servingSize);
+            validatePositive("servings", nutritionFacts.servings);
+            validatePositive("calories", nutritionFacts.calories);
+            validatePositive("carbohydrate", nutritionFacts.carbohydrate);
+            validatePositive("fat", nutritionFacts.fat);
+            validatePositive("sodium", nutritionFacts.sodium);
+        }
+
+        private void validatePositive(String name, int value) {
+            if (value < 0) {
+                throw new IllegalStateException("Property '" + name + "' should be positive.  Supplied value = " + value);
+            }
+        }
+
     }
 
     private NutritionFacts(Builder builder) {
@@ -62,7 +80,7 @@ public class NutritionFacts {
         fat = builder.fat;
         sodium = builder.sodium;
         carbohydrate = builder.carbohydrate;
-    }
+     }
 
     public int getServingSize() {
         return servingSize;
