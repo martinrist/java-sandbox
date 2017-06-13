@@ -39,7 +39,7 @@ public class UserPersistenceTest extends JPATest {
 
         User u = new User();
 
-        u.setHomeAddress(new Address("Street", new GermanZipcode("12345"), "Hamburg"));
+        u.setHomeAddress(new Address("Street", new GermanZipCode("12345"), "Hamburg"));
         em.persist(u);
 
         tx.commit();
@@ -47,7 +47,7 @@ public class UserPersistenceTest extends JPATest {
         User retrievedUser = em.createQuery("select u from User u where id = :id", User.class)
                 .setParameter("id", u.getId()).getSingleResult();
 
-        assertThat(retrievedUser.getHomeAddress().getZipcode(), Matchers.instanceOf(GermanZipcode.class));
+        assertThat(retrievedUser.getHomeAddress().getZipcode(), Matchers.instanceOf(GermanZipCode.class));
     }
 
 

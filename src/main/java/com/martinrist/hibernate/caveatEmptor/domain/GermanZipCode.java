@@ -1,8 +1,8 @@
 package com.martinrist.hibernate.caveatEmptor.domain;
 
-public class GermanZipcode extends Zipcode {
+public class GermanZipCode extends ZipCode {
 
-    public GermanZipcode(String value) {
+    public GermanZipCode(String value) {
         super(value);
     }
 

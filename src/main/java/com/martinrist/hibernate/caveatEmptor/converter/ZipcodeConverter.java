@@ -1,30 +1,30 @@
 package com.martinrist.hibernate.caveatEmptor.converter;
 
-import com.martinrist.hibernate.caveatEmptor.domain.GermanZipcode;
-import com.martinrist.hibernate.caveatEmptor.domain.SwissZipcode;
-import com.martinrist.hibernate.caveatEmptor.domain.Zipcode;
+import com.martinrist.hibernate.caveatEmptor.domain.GermanZipCode;
+import com.martinrist.hibernate.caveatEmptor.domain.SwissZipCode;
+import com.martinrist.hibernate.caveatEmptor.domain.ZipCode;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class ZipcodeConverter implements AttributeConverter<Zipcode, String> {
+public class ZipcodeConverter implements AttributeConverter<ZipCode, String> {
 
     @Override
-    public String convertToDatabaseColumn(Zipcode attribute) {
+    public String convertToDatabaseColumn(ZipCode attribute) {
 
         return (attribute == null ? "" : attribute.getValue());
     }
 
     @Override
-    public Zipcode convertToEntityAttribute(String dbData) {
+    public ZipCode convertToEntityAttribute(String dbData) {
 
         if (dbData == null || dbData.isEmpty()) return null;
 
         if (dbData.length() == 5) {
-            return new GermanZipcode(dbData);
+            return new GermanZipCode(dbData);
         } else if (dbData.length() == 4) {
-            return new SwissZipcode(dbData);
+            return new SwissZipCode(dbData);
         }
 
         throw new IllegalArgumentException("Unsupported zip code in database: " + dbData);

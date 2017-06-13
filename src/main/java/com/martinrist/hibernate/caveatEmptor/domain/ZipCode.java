@@ -2,11 +2,11 @@ package com.martinrist.hibernate.caveatEmptor.domain;
 
 import java.util.Objects;
 
-public abstract class Zipcode {
+public abstract class ZipCode {
 
     private String value;
 
-    public Zipcode(String value) {
+    public ZipCode(String value) {
         this.value = value;
     }
 
@@ -18,7 +18,7 @@ public abstract class Zipcode {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Zipcode zipCode = (Zipcode) o;
+        ZipCode zipCode = (ZipCode) o;
         return Objects.equals(value, zipCode.value);
     }
 

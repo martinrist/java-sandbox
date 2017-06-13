@@ -13,7 +13,7 @@ public class Address {
 
     @NotNull
     @Column(nullable = false, length = 5)
-    private Zipcode zipcode;
+    private ZipCode zipcode;
 
     @NotNull
     @Column(nullable = false)
@@ -22,7 +22,7 @@ public class Address {
     protected Address() {
     }
 
-    public Address(String street, Zipcode zipcode, String city) {
+    public Address(String street, ZipCode zipcode, String city) {
         this.street = street;
         this.zipcode = zipcode;
         this.city = city;
@@ -36,11 +36,11 @@ public class Address {
         this.street = street;
     }
 
-    public Zipcode getZipcode() {
+    public ZipCode getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(Zipcode zipcode) {
+    public void setZipcode(ZipCode zipcode) {
         this.zipcode = zipcode;
     }
 

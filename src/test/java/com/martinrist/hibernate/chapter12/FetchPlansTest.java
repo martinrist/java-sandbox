@@ -1,7 +1,7 @@
 package com.martinrist.hibernate.chapter12;
 
 import com.martinrist.hibernate.caveatEmptor.domain.Address;
-import com.martinrist.hibernate.caveatEmptor.domain.GermanZipcode;
+import com.martinrist.hibernate.caveatEmptor.domain.GermanZipCode;
 import com.martinrist.hibernate.caveatEmptor.domain.Item;
 import com.martinrist.hibernate.caveatEmptor.domain.User;
 import com.martinrist.hibernate.shared.JPATest;
@@ -36,7 +36,7 @@ public class FetchPlansTest extends JPATest {
         item = Item.newInstance("Item 1");
         user = User.newInstance("User 1");
 
-        Address homeAddress = new Address("Street", new GermanZipcode("12345"), "Hamburg");
+        Address homeAddress = new Address("Street", new GermanZipCode("12345"), "Hamburg");
         user.setHomeAddress(homeAddress);
 
         item.setSeller(user);

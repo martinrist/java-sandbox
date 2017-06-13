@@ -1,8 +1,6 @@
 package com.martinrist.thinkingInJava.generics;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Test;
-import sun.jvm.hotspot.ui.tree.CTypeTreeNodeAdapter;
 
 import static org.hamcrest.Matchers.*;
 
